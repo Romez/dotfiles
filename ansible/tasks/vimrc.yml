@@ -1,4 +1,5 @@
-- file:
+- name: add vimrc link
+  file:
     src: "{{ playbook_dir }}/files/.vimrc"
     dest: "{{ lookup('env','HOME') }}/.vimrc"
     state: link
