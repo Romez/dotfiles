@@ -68,6 +68,7 @@ let g:LanguageClient_serverCommands = {
         \ 'typescript': ['typescript-language-server', '--stdio'],
         \ 'css': ['css-languageserver', '--stdio'],
         \ 'json': ['json-language-server --stdio'],
+        \ 'cpp': ['clangd'],
       \ }
 
 let g:LanguageClient_loggingLevel = 'DEBUG'
