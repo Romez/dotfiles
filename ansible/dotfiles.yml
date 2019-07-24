@@ -5,3 +5,5 @@
     - name: link vimrc
       import_tasks: tasks/vimrc.yml
       tags: vimrc
+    - name: bash_profile
+      import_tasks: tasks/bash.yml
