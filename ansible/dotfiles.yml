@@ -2,6 +2,5 @@
 - hosts: all
   gather_facts: no
   tasks:
-    - name: link vimrc
-      import_tasks: tasks/vimrc.yml
-      tags: vimrc
+    - import_tasks: tasks/vimrc.yml
+    - import_tasks: tasks/install_neovim.yml
