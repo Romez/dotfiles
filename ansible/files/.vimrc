@@ -19,6 +19,9 @@ Plug 'nanotech/jellybeans.vim'
 Plug 'yardnsm/vim-import-cost', { 'do': 'npm install' }
 Plug 'jiangmiao/auto-pairs'
 Plug 'leafgarland/typescript-vim'
+Plug 'ludovicchabant/vim-lawrencium'
+Plug 'mhinz/vim-signify'
+Plug 'tpope/vim-fugitive'
 
 call plug#end()
 
