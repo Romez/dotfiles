@@ -39,6 +39,7 @@ set cmdheight=2
 set signcolumn=yes
 set scrolloff=3
 set autoindent
+set foldmethod=indent
 
 silent! colorscheme jellybeans
 
