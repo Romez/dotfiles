@@ -3,3 +3,4 @@
     src: "{{ playbook_dir }}/files/.bash_profile"
     dest: "{{ lookup('env','HOME') }}/.bash_profile"
     state: link
+  tags: bash_profile
