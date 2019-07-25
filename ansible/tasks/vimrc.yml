@@ -4,3 +4,9 @@
     dest: "{{ lookup('env','HOME') }}/.vimrc"
     state: link
   tags: vimrc
+
+  file:
+    src: "{{ playbook_dir }}/files/init.vim"
+    dest: "{{ lookup('env','HOME') }}/.config/nvim/init.vim"
+    state: link
+  tags: vimrc
