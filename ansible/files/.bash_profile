@@ -8,5 +8,6 @@ source $(brew --prefix nvm)/nvm.sh
 alias yarn='docker run -it --rm -v `pwd`:/pwd -w /pwd node yarn'
 
 export FZF_DEFAULT_OPTS="--ansi --preview-window 'right:60%' --preview 'bat --color=always --style=header,grid --line-range :300 {}'"
+export FZF_DEFAULT_COMMAND='ag --path-to-ignore ~/.ignore --hidden -g ""'
 
 alias myvim='docker run -it -v $HOME/.config/nvim:/root/.config/nvim -v $HOME/.vimrc:/root/.vimrc -v `pwd`:/data --name neovim romezzz/neovim'

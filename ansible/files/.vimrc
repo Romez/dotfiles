@@ -78,8 +78,9 @@ let g:LanguageClient_serverCommands = {
 
 let g:LanguageClient_loggingLevel = 'DEBUG'
 
-nnoremap <buffer> <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <buffer> <silent> gt :call LanguageClient#textDocument_typeDefinition()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> gt :call LanguageClient#textDocument_typeDefinition()<CR>
+nnoremap <leader>rf :call LanguageClient#textDocument_references()<CR>
 nnoremap <leader>rn :call LanguageClient#textDocument_rename()<CR>
 
 " NerdTree
