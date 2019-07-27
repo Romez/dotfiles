@@ -4,7 +4,8 @@ RUN  apt-get update && apt-get install -y \
 software-properties-common \
 curl \
 git \
-python3-pip
+python3-pip \
+silversearcher-ag
 
 #install pynvim for deoplete
 RUN pip3 install --user pynvim
@@ -22,8 +23,11 @@ RUN curl -LSso /root/.config/nvim/autoload/plug.vim --create-dirs https://raw.gi
 RUN curl -sL https://deb.nodesource.com/setup_11.x | bash - \
     && apt-get update && apt-get install -y nodejs
 
-#copy vimrc
-COPY .vimrc /root/.config/nvim/init.vim
+#install fzf
+RUN git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
+
+RUN curl -L https://github.com/sharkdp/bat/releases/download/v0.10.0/bat-v0.10.0-x86_64-unknown-linux-gnu.tar.gz | tar -C /usr/local/src -zxf - &&\
+    ln -s /usr/local/src/bat-v0.10.0-x86_64-unknown-linux-gnu/bat /usr/local/bin/bat
 
 #install npm global packages
 RUN npm i -g \
@@ -32,8 +36,15 @@ typescript-language-server \
 css-language-server \
 vscode-json-languageservice
 
+#copy vimrc
+COPY .vimrc /root/.config/nvim/init.vim
+
 #install plugs
 RUN nvim +'PlugInstall --sync' +qa
+
+# ENV FZF_DEFAULT_OPTS "--ansi --preview-window 'right:60%' --preview 'bat --color=always --style=header,grid --line-range :300 {}'"
+
+ENV FZF_DEFAULT_OPTS "--preview='bat --color=always --style=grid --line-range :300 {}' --preview-window=top:40%"
 
 WORKDIR /src
 

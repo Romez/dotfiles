@@ -46,7 +46,13 @@ silent! colorscheme jellybeans
 nnoremap ff :normal! gg=G``<CR>
 
 " FZF
-set rtp+=/usr/local/opt/fzf
+set rtp+=~/.fzf
+command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(
+  \   '',
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
 
 " LSP
 augroup filetype_typescript

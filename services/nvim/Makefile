@@ -4,7 +4,7 @@ build:
 	docker build -t $(IMAGENAME) .
 
 bash:
-	docker run --volume `pwd`:/src -it romezzz/nvim bash
+	docker run -v `pwd`:/src -it romezzz/nvim bash
 
 run:
 	docker run --volume `pwd`:/src -it romezzz/nvim nvim
