@@ -36,7 +36,6 @@ set softtabstop=2
 set shiftwidth=2
 set splitbelow
 set cmdheight=2
-set signcolumn=yes
 set scrolloff=3
 set autoindent
 set foldmethod=indent
@@ -70,10 +69,11 @@ augroup END
 let g:LanguageClient_serverCommands = {
 	\ 'javascript': ['typescript-language-server', '--stdio'],
         \ 'typescript': ['typescript-language-server', '--stdio'],
-        \ 'css': ['css-languageserver', '--stdio'],
+        \ 'css': ['css-language-server', '--stdio'],
         \ 'json': ['json-language-server --stdio'],
         \ 'cpp': ['clangd'],
-        \ 'yaml': ['yaml-language-server', '--stdio']
+        \ 'yaml': ['yaml-language-server', '--stdio'],
+        \ 'dockerfile': ['docker-langserver --stdio']
       \ }
 
 let g:LanguageClient_loggingLevel = 'DEBUG'
