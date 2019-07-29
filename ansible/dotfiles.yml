@@ -10,3 +10,5 @@
 
     - import_tasks: tasks/hgrc.yml
 
+    - import_tasks: tasks/zsh.yml
+

@@ -1,4 +1,5 @@
 alias l='ls -laG'
+alias ll='ls -laG | fzf'
 
 export NVM_DIR="$HOME/.nvm"
 source $(brew --prefix nvm)/nvm.sh

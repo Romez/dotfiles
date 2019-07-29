@@ -1,5 +1,10 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=/usr/local/bin:$PATH
+
+# NVM Stuff
+export NVM_DIR="$HOME/.nvm"
+. "$(brew --prefix nvm)/nvm.sh"
 
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/user/.oh-my-zsh"
@@ -68,7 +73,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-nvm npm)
+plugins=(git zsh-nvm npm mercurial)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -97,3 +102,5 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+#
+alias nvim='docker run -v `pwd`:/src -it romezzz/nvim nvim'
