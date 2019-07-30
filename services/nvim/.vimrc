@@ -45,6 +45,10 @@ silent! colorscheme jellybeans
 " format the entire file
 nnoremap ff :normal! gg=G``<CR>
 
+" https://github.com/vim/vim/blob/master/runtime/doc/russian.txt
+" Enable hotkeys for Russian layout
+set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
+
 " FZF
 set rtp+=~/.fzf
 command! -bang -nargs=* Ag
