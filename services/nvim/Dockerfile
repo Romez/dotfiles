@@ -43,7 +43,7 @@ COPY .vimrc /root/.config/nvim/init.vim
 #install plugs
 RUN nvim +'PlugInstall --sync' +qa
 
-# ENV FZF_DEFAULT_OPTS "--ansi --preview-window 'right:60%' --preview 'bat --color=always --style=header,grid --line-range :300 {}'"
+ENV FZF_DEFAULT_COMMAND 'ag --hidden --ignore .git -l -g ""'
 
 ENV FZF_DEFAULT_OPTS "--preview='bat --color=always --style=grid --line-range :300 {}' --preview-window=top:40%"
 
