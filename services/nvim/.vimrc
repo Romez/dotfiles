@@ -29,6 +29,10 @@ let mapleader = "\<Space>"
 nmap <silent> // :nohlsearch<CR>
 nnoremap <leader>b :Buffers<CR>
 
+" Don't redraw while executing macros (good performance config)
+set lazyredraw
+set ttyfast
+
 set hidden
 set number
 set expandtab
