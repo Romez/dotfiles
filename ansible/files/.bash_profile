@@ -9,4 +9,4 @@ source $(brew --prefix nvm)/nvm.sh
 alias yarn='docker run -it --rm -v `pwd`:/pwd -w /pwd node yarn'
 alias nvim='docker run -v `pwd`:/src -it romezzz/nvim nvim'
 
-export FZF_DEFAULT_COMMAND='ag --path-to-ignore ~/.ignore --hidden -g ""'
+export FZF_DEFAULT_COMMAND='ag --path-to-ignore ~/.ignore --hidden -l -g ""'

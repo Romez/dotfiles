@@ -69,6 +69,7 @@ command! -bang -nargs=* Ag
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
+let g:fzf_layout = { 'window': 'enew' }
 
 " LSP
 augroup filetype_typescript
