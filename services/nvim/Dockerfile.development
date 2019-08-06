@@ -27,11 +27,11 @@ RUN git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/ins
 RUN curl -L https://github.com/sharkdp/bat/releases/download/v0.10.0/bat-v0.10.0-x86_64-unknown-linux-gnu.tar.gz | tar -C /usr/local/src -zxf - &&\
     ln -s /usr/local/src/bat-v0.10.0-x86_64-unknown-linux-gnu/bat /usr/local/bin/bat
 
-#copy vimrc
-COPY ./config/.vimrc /root/.vimrc
-
 #install plugs
 RUN nvim +'PlugInstall --sync' +qa
+
+#install coc
+RUN nvim -c 'CocInstall -sync coc-json coc-html|q'
 
 ENV FZF_DEFAULT_COMMAND 'ag --hidden --ignore .git -l -g ""'
 

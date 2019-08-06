@@ -5,12 +5,11 @@ Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript' ]}
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
+" Plug 'autozimu/LanguageClient-neovim', {
+"     \ 'branch': 'next',
+"     \ 'do': 'bash install.sh',
+"     \ }
 Plug 'vim-airline/vim-airline'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'ervandew/supertab'
 Plug 'tpope/vim-repeat'
 Plug 'ntpeters/vim-better-whitespace'
@@ -22,6 +21,7 @@ Plug 'leafgarland/typescript-vim'
 Plug 'ludovicchabant/vim-lawrencium'
 Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-fugitive'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
 
@@ -61,6 +61,13 @@ vmap <leader>y :w! /tmp/.vbuf<CR>
 nmap <leader>y :.w! /tmp/.vbuf<CR>
 nmap <leader>p :r /tmp/.vbuf<CR>
 
+" coc
+nmap <silent> rn <Plug>(coc-rename)
+nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+
 " FZF
 set rtp+=~/.fzf
 command! -bang -nargs=* Ag
@@ -71,40 +78,40 @@ command! -bang -nargs=* Ag
   \   <bang>0)
 let g:fzf_layout = { 'window': 'enew' }
 
-" LSP
-augroup filetype_typescript
-    autocmd!
-    autocmd BufReadPost,BufRead,BufNewFile *.ts setlocal filetype=typescript
-augroup END
-augroup filetype_typescript.tsx
-    autocmd!
-    autocmd BufReadPost *.tsx setlocal filetype=typescript
-augroup END
-augroup filetype_scss
-  autocmd!
-  autocmd BufReadPost *.scss setlocal filetype=css
-augroup END
-augroup filetype_json
-  autocmd!
-  autocmd BufReadPost *.json setlocal filetype=json
-augroup END
+"" LSP
+" augroup filetype_typescript
+"     autocmd!
+"     autocmd BufReadPost,BufRead,BufNewFile *.ts setlocal filetype=typescript
+" augroup END
+" augroup filetype_typescript.tsx
+"     autocmd!
+"     autocmd BufReadPost *.tsx setlocal filetype=typescript
+" augroup END
+" augroup filetype_scss
+"   autocmd!
+"   autocmd BufReadPost *.scss setlocal filetype=css
+" augroup END
+" augroup filetype_json
+"   autocmd!
+"   autocmd BufReadPost *.json setlocal filetype=json
+" augroup END
 
-let g:LanguageClient_serverCommands = {
-	\ 'javascript': ['typescript-language-server', '--stdio'],
-        \ 'typescript': ['typescript-language-server', '--stdio'],
-        \ 'css': ['css-language-server', '--stdio'],
-        \ 'json': ['json-language-server --stdio'],
-        \ 'cpp': ['clangd'],
-        \ 'yaml': ['yaml-language-server', '--stdio'],
-        \ 'dockerfile': ['docker-langserver --stdio']
-      \ }
+" let g:LanguageClient_serverCommands = {
+" 	\ 'javascript': ['typescript-language-server', '--stdio'],
+"         \ 'typescript': ['typescript-language-server', '--stdio'],
+"         \ 'css': ['css-language-server', '--stdio'],
+"         \ 'json': ['json-language-server --stdio'],
+"         \ 'cpp': ['clangd'],
+"         \ 'yaml': ['yaml-language-server', '--stdio'],
+"         \ 'dockerfile': ['docker-langserver --stdio']
+"       \ }
 
-let g:LanguageClient_loggingLevel = 'DEBUG'
+" let g:LanguageClient_loggingLevel = 'DEBUG'
 
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> gt :call LanguageClient#textDocument_typeDefinition()<CR>
-nnoremap <leader>rf :call LanguageClient#textDocument_references()<CR>
-nnoremap <leader>rn :call LanguageClient#textDocument_rename()<CR>
+" nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+" nnoremap <silent> gt :call LanguageClient#textDocument_typeDefinition()<CR>
+" nnoremap <leader>rf :call LanguageClient#textDocument_references()<CR>
+" nnoremap <leader>rn :call LanguageClient#textDocument_rename()<CR>
 
 " NerdTree
 nmap <C-m> :NERDTreeFind<CR>
@@ -147,9 +154,6 @@ let g:user_emmet_settings = {
 \      'extends' : 'jsx',
 \  },
 \}
-
-" Use deoplete.
-let g:deoplete#enable_at_startup = 1
 
 " ImportCost
 augroup import_cost_auto_run

@@ -103,6 +103,6 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
-alias nvim='docker run -v `pwd`:/src -it romezzz/nvim nvim'
+# alias nvim='docker run -v `pwd`:/src -it romezzz/nvim nvim'
 alias clr='clear'
 

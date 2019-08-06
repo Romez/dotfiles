@@ -1,4 +1,5 @@
 IMAGENAME=romezzz/nvim
+USER = "$(shell id -u):$(shell id -g)"
 
 build:
 	docker build -t $(IMAGENAME) .
@@ -12,3 +13,8 @@ run:
 push:
 	docker push $(IMAGENAME)
 
+nvim-build:
+	  docker-compose build
+
+nvim-bash:
+	docker-compose run nvim bash
