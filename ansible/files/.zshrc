@@ -105,4 +105,4 @@ source $ZSH/oh-my-zsh.sh
 #
 # alias nvim='docker run -v `pwd`:/src -it romezzz/nvim nvim'
 alias clr='clear'
-
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
