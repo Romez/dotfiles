@@ -22,6 +22,7 @@ Plug 'ludovicchabant/vim-lawrencium'
 Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-fugitive'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'pangloss/vim-javascript'
 
 call plug#end()
 
