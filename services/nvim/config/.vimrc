@@ -69,7 +69,7 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 
 " FZF
-set rtp+=~/.fzf
+set rtp+=/usr/local/opt/fzf
 command! -bang -nargs=* Ag
   \ call fzf#vim#ag(
   \   '',
