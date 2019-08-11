@@ -23,6 +23,7 @@ Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-fugitive'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'pangloss/vim-javascript'
+Plug 'JamshedVesuna/vim-markdown-preview'
 
 call plug#end()
 
@@ -80,40 +81,9 @@ command! -bang -nargs=* Ag
   \   <bang>0)
 let g:fzf_layout = { 'window': 'enew' }
 
-"" LSP
-" augroup filetype_typescript
-"     autocmd!
-"     autocmd BufReadPost,BufRead,BufNewFile *.ts setlocal filetype=typescript
-" augroup END
-" augroup filetype_typescript.tsx
-"     autocmd!
-"     autocmd BufReadPost *.tsx setlocal filetype=typescript
-" augroup END
-" augroup filetype_scss
-"   autocmd!
-"   autocmd BufReadPost *.scss setlocal filetype=css
-" augroup END
-" augroup filetype_json
-"   autocmd!
-"   autocmd BufReadPost *.json setlocal filetype=json
-" augroup END
-
-" let g:LanguageClient_serverCommands = {
-" 	\ 'javascript': ['typescript-language-server', '--stdio'],
-"         \ 'typescript': ['typescript-language-server', '--stdio'],
-"         \ 'css': ['css-language-server', '--stdio'],
-"         \ 'json': ['json-language-server --stdio'],
-"         \ 'cpp': ['clangd'],
-"         \ 'yaml': ['yaml-language-server', '--stdio'],
-"         \ 'dockerfile': ['docker-langserver --stdio']
-"       \ }
-
-" let g:LanguageClient_loggingLevel = 'DEBUG'
-
-" nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-" nnoremap <silent> gt :call LanguageClient#textDocument_typeDefinition()<CR>
-" nnoremap <leader>rf :call LanguageClient#textDocument_references()<CR>
-" nnoremap <leader>rn :call LanguageClient#textDocument_rename()<CR>
+"markdown
+let vim_markdown_preview_github=1
+let vim_markdown_preview_browser='Google Chrome'
 
 " NerdTree
 nmap <C-m> :NERDTreeFind<CR>
