@@ -5,10 +5,6 @@ Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript' ]}
-" Plug 'autozimu/LanguageClient-neovim', {
-"     \ 'branch': 'next',
-"     \ 'do': 'bash install.sh',
-"     \ }
 Plug 'vim-airline/vim-airline'
 Plug 'ervandew/supertab'
 Plug 'tpope/vim-repeat'
@@ -24,6 +20,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'pangloss/vim-javascript'
 Plug 'JamshedVesuna/vim-markdown-preview'
+Plug 'editorconfig/editorconfig-vim'
 
 call plug#end()
 
