@@ -4,6 +4,7 @@
 [core]
 	fileMode = false
 	editor = nvim
+        excludesfile = ~/.gitignore
 
 [alias]
   co = checkout
