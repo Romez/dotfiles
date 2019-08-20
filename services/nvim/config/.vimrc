@@ -22,6 +22,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'heavenshell/vim-jsdoc'
 
 call plug#end()
 
@@ -79,7 +80,10 @@ command! -bang -nargs=* Ag
   \   <bang>0)
 let g:fzf_layout = { 'window': 'enew' }
 
-"markdown
+" Vim-javascript
+let g:javascript_plugin_jsdoc = 1
+
+"Markdown
 let vim_markdown_preview_github=1
 let vim_markdown_preview_browser='Google Chrome'
 
