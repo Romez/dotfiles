@@ -63,6 +63,9 @@ vmap <leader>y :w! /tmp/.vbuf<CR>
 nmap <leader>y :.w! /tmp/.vbuf<CR>
 nmap <leader>p :r /tmp/.vbuf<CR>
 
+" jsdoc
+let g:jsdoc_enable_es6 = 1
+
 " coc
 nmap <silent> rn <Plug>(coc-rename)
 nmap <silent> gr <Plug>(coc-references)
