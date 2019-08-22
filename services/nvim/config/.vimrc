@@ -139,3 +139,11 @@ augroup import_cost_auto_run
   autocmd BufEnter *.js,*.jsx,*.ts,*.tsx ImportCost
   autocmd CursorHold *.js,*.jsx,*.ts,*.tsx ImportCost
 augroup END
+
+" JavaScript shortcuts
+" Console log from insert mode; Puts focus inside parentheses
+imap cll console.log()<Esc><S-f>(a
+" Console log from visual mode on next line, puts visual selection inside parentheses
+vmap cll yocll<Esc>p
+" Console log from normal mode, inserted on next line with word your on inside parentheses
+nmap cll yiwocll<Esc>p
