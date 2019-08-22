@@ -1,13 +1,10 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH=/usr/local/bin:$PATH
-
-# NVM Stuff
-export NVM_DIR="$HOME/.nvm"
-. "$(brew --prefix nvm)/nvm.sh"
-
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/user/.oh-my-zsh"
+
+export PATH=/usr/local/bin:$PATH
+
+export NVM_DIR="$HOME/.nvm"
+. "$(brew --prefix nvm)/nvm.sh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
