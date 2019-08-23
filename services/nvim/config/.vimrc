@@ -48,6 +48,12 @@ set modifiable
 
 silent! colorscheme jellybeans
 
+" resize window
+nnoremap <silent> <Leader>= :exe "resize -10"<CR>
+nnoremap <silent> <Leader>- :exe "resize +10"<CR>
+nnoremap <silent> <Leader>0 :exe "vertical resize -10"<CR>
+nnoremap <silent> <Leader>9 :exe "vertical resize +10"<CR>
+
 " format the entire file
 nnoremap ff :normal! gg=G``<CR>
 
