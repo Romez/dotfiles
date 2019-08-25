@@ -101,7 +101,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 # alias nvim='docker run -v `pwd`:/src -it romezzz/nvim nvim'
-alias clr='clear'
+alias cl='clear'
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 
 # set locale
