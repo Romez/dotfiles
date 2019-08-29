@@ -45,6 +45,7 @@ set scrolloff=3
 set autoindent
 set foldmethod=syntax
 set modifiable
+set noendofline binary
 
 silent! colorscheme jellybeans
 
