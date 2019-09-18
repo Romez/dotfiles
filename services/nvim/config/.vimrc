@@ -23,6 +23,7 @@ Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'heavenshell/vim-jsdoc'
+Plug 'mxw/vim-jsx'
 
 call plug#end()
 
