@@ -36,6 +36,8 @@ set ttyfast
 
 set hidden
 set number
+set tabstop=2
+set shiftwidth=2
 set expandtab
 set softtabstop=2
 set shiftwidth=2
@@ -45,8 +47,6 @@ set scrolloff=3
 set autoindent
 set foldmethod=syntax
 set foldlevelstart=20
-set modifiable
-set noendofline binary
 
 silent! colorscheme jellybeans
 
