@@ -24,6 +24,8 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'mxw/vim-jsx'
+Plug 'ianks/vim-tsx'
+Plug 'cakebaker/scss-syntax.vim'
 
 call plug#end()
 
