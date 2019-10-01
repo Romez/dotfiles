@@ -26,6 +26,7 @@ Plug 'heavenshell/vim-jsdoc'
 Plug 'mxw/vim-jsx'
 Plug 'ianks/vim-tsx'
 Plug 'cakebaker/scss-syntax.vim'
+Plug 'ap/vim-css-color'
 
 call plug#end()
 
