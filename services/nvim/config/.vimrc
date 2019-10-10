@@ -51,6 +51,7 @@ set scrolloff=3
 set autoindent
 set foldmethod=syntax
 set foldlevelstart=20
+set ic
 
 silent! colorscheme jellybeans
 
