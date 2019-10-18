@@ -62,7 +62,9 @@ nnoremap <silent> <Leader>0 :exe "vertical resize +10"<CR>
 nnoremap <silent> <Leader>9 :exe "vertical resize -10"<CR>
 
 " format the entire file
-nnoremap ff :normal! gg=G``<CR>
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+vmap ff <Plug>(coc-format-selected)
+nmap ff <Plug>(coc-format-selected)
 
 " https://github.com/vim/vim/blob/master/runtime/doc/russian.txt
 " Enable hotkeys for Russian layout
