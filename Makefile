@@ -6,3 +6,6 @@ dotfiles:
 
 desktop:
 	ansible-playbook ansible/main.yml -i ansible/inventory -vv --tags "desktop"
+
+cmd:
+	ansible-playbook ansible/main.yml -i ansible/inventory -vv --tags "cmd"
