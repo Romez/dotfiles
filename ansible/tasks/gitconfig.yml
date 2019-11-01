@@ -4,9 +4,3 @@
     dest: "{{ lookup('env','HOME') }}/.gitconfig"
     state: link
   tags: gitconfig
-
-  file:
-    src: "{{ playbook_dir }}/files/.gitignore"
-    dest: "{{ lookup('env','HOME') }}/.gitignore"
-    state: link
-  tags: gitconfig

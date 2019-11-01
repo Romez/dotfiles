@@ -1,0 +1,16 @@
+[user]
+	email = roman.ushakov.89@inbox.ru
+	name = roman_ushakov
+[core]
+	fileMode = false
+	editor = nvim
+        excludesfile = ~/.gitignore
+
+[alias]
+  co = checkout
+  ci = commit
+  st = status
+  br = branch
+  hist = log --pretty=format:\"%s (%an) %h\" --graph
+  type = cat-file -t
+  dump = cat-file -p<Paste>

@@ -1,0 +1,34 @@
+- name: symlink bash_profile
+  file:
+    src: "{{ playbook_dir }}/files/dotfiles/.bash_profile"
+    dest: "{{ lookup('env','HOME') }}/.bash_profile"
+    state: link
+  tags: [ dotfiles, bash_profile ]
+
+- name: symlink gitconfig
+  file:
+    src: "{{ playbook_dir }}/files/dotfiles/.gitconfig"
+    dest: "{{ lookup('env','HOME') }}/.gitconfig"
+    state: link
+  tags: [ dotfiles, git ]
+
+- name: symlink gitignore
+  file:
+    src: "{{ playbook_dir }}/files/dotfiles/.gitignore"
+    dest: "{{ lookup('env','HOME') }}/.gitignore"
+    state: link
+  tags: [ dotfiles, git ]
+
+- name: symlink hgrc
+  file:
+    src: "{{ playbook_dir }}/files/dotfiles/.hgrc"
+    dest: "{{ lookup('env','HOME') }}/.hgrc"
+    state: link
+  tags: [ dotfiles, gitconfig ]
+
+- name: symlink zsh
+  file:
+    src: "{{ playbook_dir }}/files/dotfiles/.zshrc"
+    dest: "{{ lookup('env','HOME') }}/.zshrc"
+    state: link
+  tags: [ dotfiles, zsh ]
