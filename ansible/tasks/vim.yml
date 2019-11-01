@@ -1,0 +1,19 @@
+- name: install nvim
+  homebrew:
+    name: neovim
+    state: latest
+  tags: vim
+
+- name: add vimrc link
+  file:
+    src: "{{ playbook_dir }}/files/vim/vimrc"
+    dest: "{{ lookup('env','HOME') }}/.vimrc"
+    state: link
+  tags: vim
+
+- name: add init.vim link
+  file:
+    src: "{{ playbook_dir }}/files/vim/init.vim"
+    dest: "{{ lookup('env','HOME') }}/.config/nvim/init.vim"
+    state: link
+  tags: vim

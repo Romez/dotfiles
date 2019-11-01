@@ -2,7 +2,7 @@
 - hosts: all
   gather_facts: no
   tasks:
-    - import_tasks: tasks/vimrc.yml
+    - import_tasks: tasks/vim.yml
 
     # - import_tasks: tasks/bash.yml
 
