@@ -1,6 +1,6 @@
-- name: install nvim
+- name: install vim deps
   homebrew:
-    name: neovim
+    name: ["neovim", "bat", "fzf", "grip", "the_silver_searcher"]
     state: latest
   tags: vim
 
