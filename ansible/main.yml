@@ -4,12 +4,4 @@
   tasks:
     - import_tasks: tasks/vim.yml
     - import_tasks: tasks/dotfiles.yml
-
-    # - import_tasks: tasks/bash.yml
-
-#     - import_tasks: tasks/gitconfig.yml
-
-#     - import_tasks: tasks/hgrc.yml
-
-#     - import_tasks: tasks/zsh.yml
-
+    - import_tasks: tasks/desktop.yml

@@ -1,0 +1,5 @@
+- name: install desktop apps
+  homebrew_cask:
+    name: ["google-chrome", "firefox", "1password", "skype", "telegram", "slack"]
+    state: latest
+  tags: desktop
