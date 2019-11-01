@@ -1,6 +1,0 @@
-- name: add zsh link
-  file:
-    src: "{{ playbook_dir }}/files/.zshrc"
-    dest: "{{ lookup('env','HOME') }}/.zshrc"
-    state: link
-  tags: zsh

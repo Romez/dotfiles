@@ -1,6 +1,0 @@
-- name: add hgrc link
-  file:
-    src: "{{ playbook_dir }}/files/.hgrc"
-    dest: "{{ lookup('env','HOME') }}/.hgrc"
-    state: link
-  tags: gitconfig

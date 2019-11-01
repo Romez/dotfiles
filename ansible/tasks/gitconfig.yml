@@ -1,6 +1,0 @@
-- name: add gitconfig link
-  file:
-    src: "{{ playbook_dir }}/files/.gitconfig"
-    dest: "{{ lookup('env','HOME') }}/.gitconfig"
-    state: link
-  tags: gitconfig
