@@ -1,5 +1,12 @@
 - name: install cmd apps
   homebrew:
-    name: ["git", "ansible", "htop", "asciinema", "nvm", "tree"]
+    name: [
+      "git",
+      "ansible",
+      "htop",
+      "asciinema",
+      "nvm",
+      "tree",
+      ]
     state: latest
   tags: cmd
