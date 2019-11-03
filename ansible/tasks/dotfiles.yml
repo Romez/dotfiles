@@ -1,8 +1,7 @@
 - name: symlink bash_profile
-  file:
-    src: "{{ playbook_dir }}/files/dotfiles/.bash_profile"
+  template:
+    src: bash_profile.j2
     dest: "{{ lookup('env','HOME') }}/.bash_profile"
-    state: link
   tags: [ dotfiles, bash_profile ]
 
 - name: symlink gitconfig

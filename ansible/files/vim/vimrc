@@ -25,6 +25,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'mxw/vim-jsx'
 Plug 'guns/vim-clojure-static'
+Plug 'glench/vim-jinja2-syntax'
 
 call plug#end()
 
