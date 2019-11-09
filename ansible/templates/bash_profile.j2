@@ -18,4 +18,4 @@ export FZF_DEFAULT_COMMAND='ag --path-to-ignore ~/.ignore --hidden -l -g ""'
 export EDITOR=nvim
 
 # vimgolf
-alias vimgolf='docker run --rm -it -e "key=[{{ vimgolf_key }}]" kramos/vimgolf'
+alias vimgolf='docker run --rm -it --env key={{ vimgolf_key }} kramos/vimgolf'
