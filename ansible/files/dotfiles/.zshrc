@@ -1,11 +1,10 @@
-# Path to your oh-my-zsh installation.
-export ZSH="/Users/user/.oh-my-zsh"
-
-export PATH=/usr/local/bin:$PATH
-
 export NVM_DIR="$HOME/.nvm"
-. "$(brew --prefix nvm)/nvm.sh"
+source $(brew --prefix nvm)/nvm.sh
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+# Path to your oh-my-zsh installation.
+export ZSH=$HOME/.oh-my-zsh
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -70,10 +69,9 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-nvm npm mercurial)
+plugins=(git nvm npm mercurial)
 
 source $ZSH/oh-my-zsh.sh
-
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -100,9 +98,9 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
-# alias nvim='docker run -v `pwd`:/src -it romezzz/nvim nvim'
 alias cl='clear'
-export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
+
+export FZF_DEFAULT_COMMAND='ag --path-to-ignore ~/.ignore --hidden -l -g ""'
 
 # set locale
 export LC_ALL=en_US.UTF-8
