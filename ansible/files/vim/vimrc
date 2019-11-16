@@ -26,6 +26,7 @@ Plug 'heavenshell/vim-jsdoc'
 Plug 'mxw/vim-jsx'
 Plug 'glench/vim-jinja2-syntax'
 Plug 'kien/rainbow_parentheses.vim'
+Plug 'ap/vim-css-color'
 
 call plug#end()
 
