@@ -11,7 +11,6 @@ Plug 'tpope/vim-repeat'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-sensible'
 Plug 'nanotech/jellybeans.vim'
-Plug 'yardnsm/vim-import-cost', { 'do': 'npm install' }
 Plug 'jiangmiao/auto-pairs'
 Plug 'leafgarland/typescript-vim'
 Plug 'ludovicchabant/vim-lawrencium'
@@ -27,6 +26,7 @@ Plug 'mxw/vim-jsx'
 Plug 'glench/vim-jinja2-syntax'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'ap/vim-css-color'
+Plug 'janko-m/vim-test'
 
 call plug#end()
 
@@ -146,13 +146,8 @@ let g:user_emmet_settings = {
 \  },
 \}
 
-" ImportCost
-augroup import_cost_auto_run
-  autocmd!
-  autocmd InsertLeave *.js,*.jsx,*.ts,*.tsx ImportCost
-  autocmd BufEnter *.js,*.jsx,*.ts,*.tsx ImportCost
-  autocmd CursorHold *.js,*.jsx,*.ts,*.tsx ImportCost
-augroup END
+" Testing
+nmap <silent> <leader>t :TestNearest<CR>
 
 " JavaScript shortcuts
 " Console log from insert mode; Puts focus inside parentheses
