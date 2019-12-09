@@ -32,7 +32,7 @@ call plug#end()
 
 let mapleader = "\<Space>"
 nmap <silent> // :nohlsearch<CR>
-nnoremap <leader>b :Buffers<CR>
+nnoremap <silent> <leader>b :Buffers<CR>
 
 " Don't redraw while executing macros (good performance config)
 set lazyredraw

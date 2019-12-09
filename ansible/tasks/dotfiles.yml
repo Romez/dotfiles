@@ -31,3 +31,10 @@
     dest: "{{ lookup('env','HOME') }}/.zshrc"
     state: link
   tags: [ dotfiles, zsh ]
+
+- name: symlink ctags
+  file:
+    src: "{{ playbook_dir }}/files/dotfiles/ctags"
+    dest: "{{ lookup('env', 'HOME') }}/.ctags"
+    state: link
+  tags: [ dotfiles, ctags ]
