@@ -2,7 +2,6 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-surround'
-Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript' ]}
 Plug 'vim-airline/vim-airline'
@@ -20,7 +19,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'pangloss/vim-javascript'
 Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'mxw/vim-jsx'
 Plug 'glench/vim-jinja2-syntax'
@@ -86,6 +84,7 @@ nmap <silent> gr <Plug>(coc-references)
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> <leader><leader> :CocCommand explorer<CR>
 
 " FZF
 set rtp+=/usr/local/opt/fzf
@@ -105,8 +104,8 @@ let vim_markdown_preview_github=1
 let vim_markdown_preview_browser='Google Chrome'
 
 " NerdTree
-nmap <C-m> :NERDTreeFind<CR>
-nmap <silent> <leader><leader> :NERDTreeToggle<CR>
+" nmap <C-m> :NERDTreeFind<CR>
+" nmap <silent> <leader><leader> :NERDTreeToggle<CR>
 
 " Map ctrl-movement keys to window switching
 map <C-k> <C-w><Up>
