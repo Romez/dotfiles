@@ -25,6 +25,7 @@ Plug 'glench/vim-jinja2-syntax'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'ap/vim-css-color'
 Plug 'janko-m/vim-test'
+Plug 'tpope/vim-fireplace'
 
 call plug#end()
 
