@@ -38,3 +38,10 @@
     dest: "{{ lookup('env', 'HOME') }}/.ctags"
     state: link
   tags: [ dotfiles, ctags ]
+
+- name: symlink eslintignore global
+  file:
+    src: "{{ playbook_dir }}/files/dotfiles/.eslintignore"
+    dest: "{{ lookup('env', 'HOME') }}/.eslintignore"
+    state: link
+  tags: [dotfiles, eslint]
