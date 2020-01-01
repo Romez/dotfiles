@@ -28,6 +28,7 @@ Plug 'janko-m/vim-test'
 Plug 'tpope/vim-fireplace'
 Plug 'craigemery/vim-autotag'
 Plug 'wlangstroth/vim-racket'
+Plug 'embear/vim-localvimrc'
 
 call plug#end()
 
