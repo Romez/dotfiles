@@ -2,6 +2,7 @@
 --exclude=.git
 --exclude=log
 --exclude=tmp
+--exclude=package-lock.json
 
 --langmap=javascript:.js.es6.es.jsx
 --javascript-kinds=-c-f-m-p-v

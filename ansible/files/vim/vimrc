@@ -26,7 +26,8 @@ Plug 'kien/rainbow_parentheses.vim'
 Plug 'ap/vim-css-color'
 Plug 'janko-m/vim-test'
 Plug 'tpope/vim-fireplace'
-Plug 'ludovicchabant/vim-gutentags'
+Plug 'craigemery/vim-autotag'
+Plug 'wlangstroth/vim-racket'
 
 call plug#end()
 
