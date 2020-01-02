@@ -29,6 +29,7 @@ Plug 'tpope/vim-fireplace'
 Plug 'craigemery/vim-autotag'
 Plug 'wlangstroth/vim-racket'
 Plug 'embear/vim-localvimrc'
+Plug 'slim-template/vim-slim'
 
 call plug#end()
 
