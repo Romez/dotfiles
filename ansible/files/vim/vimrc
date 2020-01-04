@@ -108,9 +108,8 @@ let g:javascript_plugin_jsdoc = 1
 let vim_markdown_preview_github=1
 let vim_markdown_preview_browser='Google Chrome'
 
-" NerdTree
-" nmap <C-m> :NERDTreeFind<CR>
-" nmap <silent> <leader><leader> :NERDTreeToggle<CR>
+"Local vimrc
+let g:localvimrc_ask=0
 
 " Map ctrl-movement keys to window switching
 map <C-k> <C-w><Up>
