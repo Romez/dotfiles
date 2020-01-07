@@ -30,6 +30,7 @@ Plug 'craigemery/vim-autotag'
 Plug 'wlangstroth/vim-racket'
 Plug 'embear/vim-localvimrc'
 Plug 'slim-template/vim-slim'
+Plug 'terryma/vim-multiple-cursors'
 
 call plug#end()
 
