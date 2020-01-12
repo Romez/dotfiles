@@ -8,4 +8,4 @@ desktop:
 	ansible-playbook ansible/main.yml -i ansible/inventory -vv --tags "desktop"
 
 cmd:
-	ansible-playbook ansible/main.yml -i ansible/inventory -vv --tags "cmd"
+	ansible-playbook ansible/main.yml -i ansible/inventory -vv --tags "cmd" --ask-vault-pass
