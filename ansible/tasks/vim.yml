@@ -17,3 +17,17 @@
     dest: "{{ lookup('env','HOME') }}/.config/nvim/init.vim"
     state: link
   tags: vim
+
+- name: init coc-extensions
+  file:
+    src: "{{ playbook_dir }}/files/vim/coc/package.json"
+    dest: "{{ lookup('env','HOME') }}/.config/coc/extensions/package.json"
+    state: link
+  tags: vim
+
+- name: init coc-settings
+  file:
+    src: "{{ playbook_dir }}/files/vim/coc/coc-settings.json"
+    dest: "{{ lookup('env','HOME') }}/.config/nvim/coc-settings.json"
+    state: link
+  tags: vim
