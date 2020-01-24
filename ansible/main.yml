@@ -2,7 +2,7 @@
 - hosts: all
   gather_facts: no
   tasks:
-    - import_tasks: tasks/vim.yml
     - import_tasks: tasks/dotfiles.yml
+    - import_tasks: tasks/vim.yml
     - import_tasks: tasks/desktop.yml
     - import_tasks: tasks/cmd.yml
