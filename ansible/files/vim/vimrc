@@ -33,6 +33,9 @@ Plug 'slim-template/vim-slim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'universal-ctags/ctags'
 Plug 'craigemery/vim-autotag'
+Plug 'scrooloose/nerdtree'
+Plug 'xuyuanp/nerdtree-git-plugin'
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
@@ -92,7 +95,11 @@ nmap <silent> gr <Plug>(coc-references)
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> <leader><leader> :CocCommand explorer<CR>
+" nmap <silent> <leader><leader> :CocCommand explorer<CR>
+
+" nerdtree
+nmap <silent> <leader><leader> :NERDTreeToggle<CR>
+let g:NERDTreeShowIgnoredStatus = 1
 
 " FZF
 set rtp+=/usr/local/opt/fzf
