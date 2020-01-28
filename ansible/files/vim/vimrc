@@ -98,6 +98,7 @@ nmap <silent> gi <Plug>(coc-implementation)
 " nmap <silent> <leader><leader> :CocCommand explorer<CR>
 
 " nerdtree
+nmap <C-m> :NERDTreeFind<CR>
 nmap <silent> <leader><leader> :NERDTreeToggle<CR>
 let g:NERDTreeShowIgnoredStatus = 1
 
