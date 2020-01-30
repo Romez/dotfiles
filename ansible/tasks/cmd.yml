@@ -9,6 +9,7 @@
       "tree",
       "yarn",
       "terraform",
+      "heroku/brew/heroku",
       ]
     state: latest
   tags: cmd
