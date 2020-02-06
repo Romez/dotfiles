@@ -3,14 +3,15 @@
     "coc-css": ">=1.2.2",
     "coc-docker": ">=0.2.1",
     "coc-emmet": ">=1.1.4",
-    "coc-eslint": ">=1.2.3",
-    "coc-git": ">=1.6.18",
+    "coc-eslint": ">=1.2.5",
+    "coc-explorer": ">=0.2.17",
+    "coc-git": ">=1.7.0",
     "coc-html": ">=1.2.1",
     "coc-java": ">=1.4.5",
     "coc-json": ">=1.2.4",
     "coc-prettier": ">=1.1.11",
     "coc-tsserver": ">=1.4.9",
-    "coc-xml": ">=1.9.5",
+    "coc-xml": ">=1.10.0",
     "coc-yaml": ">=1.0.2"
   }
 }

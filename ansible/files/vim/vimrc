@@ -33,9 +33,10 @@ Plug 'slim-template/vim-slim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'universal-ctags/ctags'
 Plug 'craigemery/vim-autotag'
-Plug 'scrooloose/nerdtree'
-Plug 'xuyuanp/nerdtree-git-plugin'
-Plug 'ryanoasis/vim-devicons'
+Plug 'christoomey/vim-tmux-navigator'
+" Plug 'scrooloose/nerdtree'
+" Plug 'xuyuanp/nerdtree-git-plugin'
+" Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
@@ -95,12 +96,12 @@ nmap <silent> gr <Plug>(coc-references)
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
-" nmap <silent> <leader><leader> :CocCommand explorer<CR>
+nmap <silent> <leader><leader> :CocCommand explorer<CR>
 
 " nerdtree
-nmap <C-m> :NERDTreeFind<CR>
-nmap <silent> <leader><leader> :NERDTreeToggle<CR>
-let g:NERDTreeShowIgnoredStatus = 1
+" nmap <C-m> :NERDTreeFind<CR>
+" nmap <silent> <leader><leader> :NERDTreeToggle<CR>
+" let g:NERDTreeShowIgnoredStatus = 1
 
 " FZF
 set rtp+=/usr/local/opt/fzf
@@ -135,22 +136,22 @@ nnoremap <leader>ff :Files<CR>
 nnoremap <leader>fa :Ag<CR>
 
 " Open new split for C+hjkl, if split doesnt exist
-map <silent> <C-h> :call WinMove('h')<CR>
-map <silent> <C-j> :call WinMove('j')<CR>
-map <silent> <C-k> :call WinMove('k')<CR>
-map <silent> <C-l> :call WinMove('l')<CR>
-function! WinMove(key)
-  let t:curwin = winnr()
-  exec "wincmd ".a:key
-    if (t:curwin == winnr())
-      if (match(a:key,'[jk]'))
-        wincmd v
-      else
-        wincmd s
-      endif
-   exec "wincmd ".a:key
-  endif
-endfunction
+" map <silent> <C-h> :call WinMove('h')<CR>
+" map <silent> <C-j> :call WinMove('j')<CR>
+" map <silent> <C-k> :call WinMove('k')<CR>
+" map <silent> <C-l> :call WinMove('l')<CR>
+" function! WinMove(key)
+"   let t:curwin = winnr()
+"   exec "wincmd ".a:key
+"     if (t:curwin == winnr())
+"       if (match(a:key,'[jk]'))
+"         wincmd v
+"       else
+"         wincmd s
+"       endif
+"    exec "wincmd ".a:key
+"   endif
+" endfunction
 
 " emmet
 let g:user_emmet_leader_key=','
