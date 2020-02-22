@@ -1,14 +1,5 @@
 {
   "explorer.icon.enableNerdfont": true,
-  "explorer.file.columns": [
-    "git",
-    "selection",
-    "clip",
-    "diagnosticError",
-    "indent",
-    "icon",
-    "filename"
-  ],
   "explorer.sources": [
     {
       "name": "file",

@@ -4,7 +4,7 @@
     "coc-docker": ">=0.2.1",
     "coc-emmet": ">=1.1.4",
     "coc-eslint": ">=1.2.6",
-    "coc-explorer": ">=0.3.0",
+    "coc-explorer": ">=0.3.3",
     "coc-git": ">=1.7.2",
     "coc-html": ">=1.2.3",
     "coc-java": ">=1.4.5",
