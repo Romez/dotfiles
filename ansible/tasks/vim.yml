@@ -31,3 +31,10 @@
     dest: "{{ lookup('env','HOME') }}/.config/nvim/coc-settings.json"
     state: link
   tags: vim
+
+- name: symlink vim search files
+  file:
+    src: "{{ playbook_dir }}/files/dotfiles/.ignore"
+    dest: "{{ lookup('env', 'HOME') }}/.ignore"
+    state: link
+  tags: vim

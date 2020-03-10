@@ -1,3 +1,8 @@
+--exclude=node_modules
+--exclude=.git
+--exclude=log
+--exclude=tmp
+
 --langmap=javascript:.js.es6.es.jsx
 --javascript-kinds=-c-f-m-p-v
 
