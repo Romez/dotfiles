@@ -1,19 +1,12 @@
 {
   "dependencies": {
-    "coc-css": ">=1.2.2",
+    "coc-css": ">=1.2.3",
     "coc-docker": ">=0.2.1",
-    "coc-emmet": ">=1.1.4",
     "coc-eslint": ">=1.2.6",
-    "coc-explorer": ">=0.3.7",
-    "coc-git": ">=1.7.7",
-    "coc-html": ">=1.2.3",
-    "coc-java": ">=1.4.8",
-    "coc-json": ">=1.2.5",
-    "coc-prettier": ">=1.1.11",
-    "coc-tslint": ">=1.0.17",
-    "coc-tslint-plugin": ">=1.1.1",
-    "coc-tsserver": ">=1.4.11",
-    "coc-xml": ">=1.10.1",
-    "coc-yaml": ">=1.0.4"
+    "coc-explorer": ">=0.6.2",
+    "coc-git": ">=1.7.13",
+    "coc-highlight": ">=1.2.5",
+    "coc-prettier": ">=1.1.12",
+    "coc-tsserver": ">=1.5.1"
   }
 }

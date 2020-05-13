@@ -3,50 +3,45 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
-Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript' ]}
-Plug 'vim-airline/vim-airline'
-Plug 'ervandew/supertab'
-Plug 'tpope/vim-repeat'
-Plug 'ntpeters/vim-better-whitespace'
-Plug 'tpope/vim-sensible'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'embear/vim-localvimrc'
 Plug 'nanotech/jellybeans.vim'
 Plug 'jiangmiao/auto-pairs'
-Plug 'leafgarland/typescript-vim'
-Plug 'ludovicchabant/vim-lawrencium'
-Plug 'mhinz/vim-signify'
-Plug 'tpope/vim-fugitive'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'pangloss/vim-javascript'
+Plug 'digitaltoad/vim-pug'
 Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'heavenshell/vim-jsdoc'
-Plug 'mxw/vim-jsx'
-Plug 'glench/vim-jinja2-syntax'
-Plug 'kien/rainbow_parentheses.vim'
-Plug 'ap/vim-css-color'
 Plug 'janko-m/vim-test'
-Plug 'tpope/vim-fireplace'
-Plug 'craigemery/vim-autotag'
+Plug 'vim-airline/vim-airline'
+Plug 'ervandew/supertab'
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'tpope/vim-fugitive'
 Plug 'wlangstroth/vim-racket'
-Plug 'embear/vim-localvimrc'
-Plug 'slim-template/vim-slim'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'craigemery/vim-autotag'
-Plug 'styled-components/vim-styled-components'
-Plug 'digitaltoad/vim-pug'
-" Plug 'scrooloose/nerdtree'
-" Plug 'xuyuanp/nerdtree-git-plugin'
-" Plug 'ryanoasis/vim-devicons'
-
+Plug 'mattn/emmet-vim'
+" Plug 'tpope/vim-repeat'
+" Plug 'ntpeters/vim-better-whitespace'
+" Plug 'tpope/vim-sensible'
+" Plug 'mhinz/vim-signify'
+" Plug 'heavenshell/vim-jsdoc'
+" Plug 'glench/vim-jinja2-syntax'
+" Plug 'kien/rainbow_parentheses.vim'
+" Plug 'ap/vim-css-color'
+" Plug 'tpope/vim-fireplace'
+" Plug 'craigemery/vim-autotag'
+" Plug 'slim-template/vim-slim'
+" Plug 'craigemery/vim-autotag'
+" Plug 'styled-components/vim-styled-components'
 call plug#end()
 
 let mapleader = "\<Space>"
 nmap <silent> // :nohlsearch<CR>
-nnoremap <silent> <leader>b :Buffers<CR>
+nmap <silent> <leader>b :Buffer<CR>
 
 " Don't redraw while executing macros (good performance config)
-set lazyredraw
-set ttyfast
+" set lazyredraw
+" set ttyfast
 
 set hidden
 set number
@@ -61,6 +56,12 @@ set scrolloff=3
 set autoindent
 set foldmethod=syntax
 set foldlevelstart=20
+set updatetime=300
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+set signcolumn=yes
 
 silent! colorscheme jellybeans
 
@@ -70,10 +71,8 @@ nnoremap <silent> <Leader>- :exe "resize -10"<CR>
 nnoremap <silent> <Leader>0 :exe "vertical resize +10"<CR>
 nnoremap <silent> <Leader>9 :exe "vertical resize -10"<CR>
 
-" format the entire file
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-vmap ff <Plug>(coc-format-selected)
-nmap ff <Plug>(coc-format-selected)
+" find merge conflict markers
+nmap <silent> <leader>fc <ESC>/\v^[<=>]{7}( .*\|$)<CR>
 
 " https://github.com/vim/vim/blob/master/runtime/doc/russian.txt
 " Enable hotkeys for Russian layout
@@ -87,8 +86,11 @@ vmap <leader>y :w! /tmp/.vbuf<CR>
 nmap <leader>y :.w! /tmp/.vbuf<CR>
 nmap <leader>p :r /tmp/.vbuf<CR>
 
+" enable coc-highlights css color
+set termguicolors
+
 " jsdoc
-let g:jsdoc_enable_es6 = 1
+" let g:jsdoc_enable_es6 = 1
 
 " coc
 nmap <silent> rn <Plug>(coc-rename)
@@ -98,6 +100,22 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> <leader><leader> :CocCommand explorer<CR>
 
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" format the entire file
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+vmap ff <Plug>(coc-format-selected)
+nmap ff <Plug>(coc-format-selected)
+
 " nerdtree
 " nmap <C-m> :NERDTreeFind<CR>
 " nmap <silent> <leader><leader> :NERDTreeToggle<CR>
@@ -105,16 +123,16 @@ nmap <silent> <leader><leader> :CocCommand explorer<CR>
 
 " FZF
 set rtp+=/usr/local/opt/fzf
-command! -bang -nargs=* Ag
-  \ call fzf#vim#ag(
-  \   '',
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('up:70%:hidden', '?'),
-  \   <bang>0)
-let g:fzf_layout = { 'window': 'enew' }
+" command! -bang -nargs=* Ag
+"   \ call fzf#vim#ag(
+"   \   '',
+"   \   <bang>0 ? fzf#vim#with_preview('up:60%')
+"   \           : fzf#vim#with_preview('up:70%:hidden', '?'),
+"   \   <bang>0)
+" let g:fzf_layout = { 'window': 'enew' }
 
 " Vim-javascript
-let g:javascript_plugin_jsdoc = 1
+" let g:javascript_plugin_jsdoc = 1
 
 "Markdown
 let vim_markdown_preview_github=1
@@ -136,22 +154,22 @@ nnoremap <leader>ff :Files<CR>
 nnoremap <leader>fa :Ag<CR>
 
 " Open new split for C+hjkl, if split doesnt exist
-" map <silent> <C-h> :call WinMove('h')<CR>
-" map <silent> <C-j> :call WinMove('j')<CR>
-" map <silent> <C-k> :call WinMove('k')<CR>
-" map <silent> <C-l> :call WinMove('l')<CR>
-" function! WinMove(key)
-"   let t:curwin = winnr()
-"   exec "wincmd ".a:key
-"     if (t:curwin == winnr())
-"       if (match(a:key,'[jk]'))
-"         wincmd v
-"       else
-"         wincmd s
-"       endif
-"    exec "wincmd ".a:key
-"   endif
-" endfunction
+map <silent> <C-h> :call WinMove('h')<CR>
+map <silent> <C-j> :call WinMove('j')<CR>
+map <silent> <C-k> :call WinMove('k')<CR>
+map <silent> <C-l> :call WinMove('l')<CR>
+function! WinMove(key)
+  let t:curwin = winnr()
+  exec "wincmd ".a:key
+    if (t:curwin == winnr())
+      if (match(a:key,'[jk]'))
+        wincmd v
+      else
+        wincmd s
+      endif
+   exec "wincmd ".a:key
+  endif
+endfunction
 
 " emmet
 let g:user_emmet_leader_key=','
@@ -160,6 +178,12 @@ let g:user_emmet_settings = {
 \      'extends' : 'jsx',
 \  },
 \}
+
+" Enable tsx hightlighting
+augroup SyntaxSettings
+    autocmd!
+    autocmd BufNewFile,BufRead *.tsx set filetype=typescript
+augroup END
 
 " Testing
 nmap <silent> <leader>t :TestNearest<CR>

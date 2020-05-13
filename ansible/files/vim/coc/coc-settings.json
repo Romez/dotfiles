@@ -6,5 +6,6 @@
       "expand": true
     }
   ],
+  "eslint.filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "explorer.previewAction.onHover": false
 }
