@@ -29,7 +29,6 @@ Plug 'mattn/emmet-vim'
 " Plug 'kien/rainbow_parentheses.vim'
 " Plug 'ap/vim-css-color'
 " Plug 'tpope/vim-fireplace'
-" Plug 'craigemery/vim-autotag'
 " Plug 'slim-template/vim-slim'
 " Plug 'craigemery/vim-autotag'
 " Plug 'styled-components/vim-styled-components'
@@ -102,6 +101,7 @@ nmap <silent> <leader><leader> :CocCommand explorer<CR>
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
+" nmap <silent> FJ <Plug>(coc-float-jump)
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
