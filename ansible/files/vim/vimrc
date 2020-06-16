@@ -14,37 +14,31 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'janko-m/vim-test'
 Plug 'vim-airline/vim-airline'
 Plug 'ervandew/supertab'
-Plug 'pangloss/vim-javascript'
-Plug 'leafgarland/typescript-vim'
-Plug 'maxmellon/vim-jsx-pretty'
 Plug 'tpope/vim-fugitive'
 Plug 'wlangstroth/vim-racket'
 Plug 'mattn/emmet-vim'
-" Plug 'tpope/vim-repeat'
-" Plug 'ntpeters/vim-better-whitespace'
-" Plug 'tpope/vim-sensible'
-" Plug 'mhinz/vim-signify'
-" Plug 'heavenshell/vim-jsdoc'
-" Plug 'glench/vim-jinja2-syntax'
-" Plug 'kien/rainbow_parentheses.vim'
-" Plug 'ap/vim-css-color'
-" Plug 'tpope/vim-fireplace'
-" Plug 'slim-template/vim-slim'
-" Plug 'craigemery/vim-autotag'
-" Plug 'styled-components/vim-styled-components'
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'luochen1990/rainbow'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'AlphaMycelium/pathfinder.vim'
 call plug#end()
 
 let mapleader = "\<Space>"
 nmap <silent> // :nohlsearch<CR>
 nmap <silent> <leader>b :Buffer<CR>
 
+let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
+
 " Don't redraw while executing macros (good performance config)
-" set lazyredraw
-" set ttyfast
+set lazyredraw
+set ttyfast
 
 set hidden
 set number
 set tabstop=2
+" set encoding=utf-8
 set shiftwidth=2
 set expandtab
 set softtabstop=2
@@ -97,7 +91,7 @@ nmap <silent> gr <Plug>(coc-references)
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> <leader><leader> :CocCommand explorer<CR>
+nmap <silent> <leader><leader> :CocCommand explorer --sources=file+<CR>
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -178,12 +172,6 @@ let g:user_emmet_settings = {
 \      'extends' : 'jsx',
 \  },
 \}
-
-" Enable tsx hightlighting
-augroup SyntaxSettings
-    autocmd!
-    autocmd BufNewFile,BufRead *.tsx set filetype=typescript
-augroup END
 
 " Testing
 nmap <silent> <leader>t :TestNearest<CR>
