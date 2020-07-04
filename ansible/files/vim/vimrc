@@ -23,6 +23,9 @@ Plug 'luochen1990/rainbow'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'AlphaMycelium/pathfinder.vim'
+Plug 'psliwka/vim-smoothie'
+Plug 'tpope/vim-dadbod'
+Plug 'kristijanhusak/vim-dadbod-ui'
 call plug#end()
 
 let mapleader = "\<Space>"
