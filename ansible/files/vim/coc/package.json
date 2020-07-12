@@ -4,10 +4,10 @@
     "coc-db": ">=0.0.30",
     "coc-docker": ">=0.3.0",
     "coc-eslint": ">=1.2.7",
-    "coc-explorer": ">=0.7.14",
-    "coc-git": ">=1.7.15",
+    "coc-explorer": ">=0.7.18",
+    "coc-git": ">=1.8.0",
     "coc-highlight": ">=1.2.5",
-    "coc-prettier": ">=1.1.15",
+    "coc-prettier": ">=1.1.17",
     "coc-tsserver": ">=1.5.2",
     "coc-yaml": ">=1.0.4"
   }

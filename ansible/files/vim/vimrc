@@ -26,6 +26,7 @@ Plug 'AlphaMycelium/pathfinder.vim'
 Plug 'psliwka/vim-smoothie'
 Plug 'tpope/vim-dadbod'
 Plug 'kristijanhusak/vim-dadbod-ui'
+Plug 'slim-template/vim-slim'
 call plug#end()
 
 let mapleader = "\<Space>"
