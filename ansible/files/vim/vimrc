@@ -27,6 +27,7 @@ Plug 'psliwka/vim-smoothie'
 Plug 'tpope/vim-dadbod'
 Plug 'kristijanhusak/vim-dadbod-ui'
 Plug 'slim-template/vim-slim'
+Plug 'jpalardy/vim-slime'
 call plug#end()
 
 let mapleader = "\<Space>"
@@ -210,3 +211,5 @@ let g:rbpt_colorpairs = [
 
 let g:rbpt_max = 16
 let g:rbpt_loadcmd_toggle = 0
+
+let g:slime_target = "tmux"
