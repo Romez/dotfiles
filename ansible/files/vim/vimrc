@@ -12,7 +12,6 @@ Plug 'digitaltoad/vim-pug'
 Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'janko-m/vim-test'
-Plug 'vim-airline/vim-airline'
 Plug 'ervandew/supertab'
 Plug 'tpope/vim-fugitive'
 Plug 'wlangstroth/vim-racket'
@@ -29,6 +28,8 @@ Plug 'kristijanhusak/vim-dadbod-ui'
 Plug 'slim-template/vim-slim'
 Plug 'jpalardy/vim-slime'
 Plug 'mhinz/vim-startify'
+Plug 'hardcoreplayers/spaceline.vim'
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 let mapleader = "\<Space>"
