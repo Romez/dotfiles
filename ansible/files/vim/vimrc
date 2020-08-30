@@ -214,4 +214,11 @@ let g:rbpt_colorpairs = [
 let g:rbpt_max = 16
 let g:rbpt_loadcmd_toggle = 0
 
+" Slime
 let g:slime_target = "tmux"
+
+" Move lines
+inoremap <S-C-j> <Esc>:m .+1<CR>==gi
+inoremap <S-C-k> <Esc>:m .-2<CR>==gi
+vnoremap <S-C-j> :m '>+1<CR>gv=gv
+vnoremap <S-C-k> :m '<-2<CR>gv=gv
