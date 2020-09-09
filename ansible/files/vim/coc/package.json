@@ -4,7 +4,7 @@
     "coc-db": ">=0.0.31",
     "coc-docker": ">=0.3.0",
     "coc-eslint": ">=1.2.7",
-    "coc-explorer": ">=0.7.27",
+    "coc-explorer": ">=0.7.31",
     "coc-git": ">=1.8.3",
     "coc-highlight": ">=1.2.5",
     "coc-prettier": ">=1.1.17",
