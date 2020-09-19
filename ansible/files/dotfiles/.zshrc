@@ -69,7 +69,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git nvm npm mercurial mvn)
+plugins=(git nvm npm mvn)
 
 source $ZSH/oh-my-zsh.sh
 # User configuration
@@ -100,6 +100,7 @@ export EDITOR='nvim'
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 alias cl='clear'
+alias python=/usr/local/bin/python3
 
 export FZF_DEFAULT_COMMAND='ag --path-to-ignore ~/.ignore --hidden -l -g ""'
 
@@ -107,5 +108,3 @@ export FZF_DEFAULT_COMMAND='ag --path-to-ignore ~/.ignore --hidden -l -g ""'
 export LC_ALL=en_US.UTF-8
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-alias python=/usr/local/bin/python3
