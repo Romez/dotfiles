@@ -1,7 +1,8 @@
-- name: install vim deps
+- name: install vim deps OSX
   homebrew:
     name: ["neovim", "bat", "fzf", "grip", "the_silver_searcher"]
     state: latest
+  when: ansible_facts['os_family'] == "Darwin"
   tags: vim
 
 - name: add vimrc link
@@ -11,11 +12,25 @@
     state: link
   tags: vim
 
+- name: Make sure init.vim file destination dir exists
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.config/nvim"
+    state: directory
+    recurse: yes
+  tags: vim
+
 - name: add init.vim link
   file:
     src: "{{ playbook_dir }}/files/vim/init.vim"
     dest: "{{ lookup('env','HOME') }}/.config/nvim/init.vim"
     state: link
+  tags: vim
+
+- name: Make sure coc-extenstions file destination dir exists
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.config/coc/extensions"
+    state: directory
+    recurse: yes
   tags: vim
 
 - name: init coc-extensions

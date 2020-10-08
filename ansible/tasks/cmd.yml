@@ -1,4 +1,4 @@
-- name: install cmd apps
+- name: install cmd apps OSX
   homebrew:
     name: [
       "git",
@@ -14,3 +14,15 @@
       ]
     state: latest
   tags: cmd
+  when: ansible_facts['os_family'] == "Darwin"
+
+- name: install cmd apps Linux
+  apt:
+    name: [
+      "zsh",
+      "nvm",
+    ]
+    state: latest
+  become: true
+  tags: cmd
+  when: ansible_facts['os_family'] == "Debian"
