@@ -11,6 +11,7 @@
       "terraform",
       "heroku/brew/heroku",
       "wget",
+      "pstree",
       ]
     state: latest
   tags: cmd
