@@ -1,5 +1,8 @@
-vim:
-	ansible-playbook ansible/main.yml -i ansible/inventory -vv --tags "vim" --ask-vault-pass
+nvim:
+	ansible-playbook nvim.yml 
+
+zsh:
+	ansible-playbook zsh.yml
 
 dotfiles:
 	ansible-playbook ansible/main.yml -i ansible/inventory -vv --tags "dotfiles" --ask-vault-pass

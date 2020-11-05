@@ -1,6 +1,0 @@
----
-- hosts: ubuntu
-  tasks:
-    - import_tasks: tasks/cmd.yml
-    - import_tasks: tasks/zsh.yml
-    - import_tasks: tasks/nvim.yml
