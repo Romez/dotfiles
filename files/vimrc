@@ -117,19 +117,26 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 vmap ff <Plug>(coc-format-selected)
 nmap ff <Plug>(coc-format-selected)
 
-" nerdtree
-" nmap <C-m> :NERDTreeFind<CR>
-" nmap <silent> <leader><leader> :NERDTreeToggle<CR>
-" let g:NERDTreeShowIgnoredStatus = 1
+let g:coc_global_extensions = [
+      \ "coc-clangd",
+      \ "coc-css",
+      \ "coc-db",
+      \ "coc-docker",
+      \ "coc-eslint",
+      \ "coc-explorer",
+      \ "coc-git",
+      \ "coc-highlight",
+      \ "coc-prettier",
+      \ "coc-python",
+      \ "coc-solargraph",
+      \ "coc-stylelint",
+      \ "coc-stylelintplus",
+      \ "coc-tsserver",
+      \ "coc-yaml",
+ \ ]
 
 " FZF
 set rtp+=/usr/local/opt/fzf
-" command! -bang -nargs=* Ag
-"   \ call fzf#vim#ag(
-"   \   '',
-"   \   <bang>0 ? fzf#vim#with_preview('up:60%')
-"   \           : fzf#vim#with_preview('up:70%:hidden', '?'),
-"   \   <bang>0)
 let g:fzf_layout = { 'window': 'enew' }
 
 " Vim-javascript

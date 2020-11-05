@@ -20,7 +20,6 @@
 - name: install cmd apps Linux
   apt:
     name: [
-      "zsh",
       "nvm",
     ]
     state: latest
