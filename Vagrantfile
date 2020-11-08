@@ -12,13 +12,7 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
-  config.vm.define "ubuntu" do |ubuntu|
-    config.vm.box = "peru/ubuntu-20.04-desktop-amd64"
-  end
-
-  config.vm.define "macos" do |macos|
-    config.vm.box = "tas50/macos_10.15"
-  end
+  config.vm.box = "bento/ubuntu-20.04"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
