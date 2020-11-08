@@ -1,0 +1,27 @@
+---
+- hosts: localhost
+  tasks:
+    - name: copy gitconfig
+      copy:
+        src: files/.gitconfig
+        dest: ~/.gitconfig
+
+    - name: copy gitignore
+      copy:
+        src: files/.gitignore
+        dest: ~/.gitignore
+
+    - name: copy hgrc
+      copy:
+        src: files/.hgrc
+        dest: ~/.hgrc
+
+    - name: copy ctags
+      copy:
+        src: files/ctags
+        dest: ~/.ctags
+
+    - name: copy eslintignore
+      copy:
+        src: files/.eslintignore
+        dest: ~/.eslintignore

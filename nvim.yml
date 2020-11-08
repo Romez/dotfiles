@@ -4,9 +4,20 @@
     - name: install neovim debian
       become: True
       apt:
-        name: [neovim, bat, fzf, grip, silversearcher-ag] 
         update_cache: yes
+        name:
+          - neovim
+          - bat
+          - fzf
+          - grip
+          - silversearcher-ag
       when: ansible_facts['os_family'] == "Debian"
+
+    - name: set bat
+      file:
+        src: /usr/bin/batcat
+        dest: ~/.local/bin/bat
+        state: link
 
     - name: install neovim mac
       homebrew:
