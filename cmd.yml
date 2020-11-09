@@ -26,19 +26,21 @@
 
     - name: install cmd apps OSX
       homebrew:
-        name: [
-          "git",
-          "ansible",
-          "htop",
-          "asciinema",
-          "nvm",
-          "tree",
-          "yarn",
-          "terraform",
-          "heroku/brew/heroku",
-          "wget",
-          "pstree",
-          ]
+        name: "{{ item }}" 
         state: latest
+      loop:
+        - "git"
+        - "ansible"
+        - "htop"
+        - "asciinema"
+        - "nvm"
+        - "tree"
+        - "yarn"
+        - "terraform"
+        - "wget"
+        - "heroku/brew/heroku"
+        - "pstree"
+        - "nmap"
+
       tags: cmd
       when: ansible_facts['os_family'] == "Darwin"
