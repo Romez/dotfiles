@@ -41,6 +41,7 @@
         - "heroku/brew/heroku"
         - "pstree"
         - "nmap"
-
+        - "docker"
+        - "docker-machine"
       tags: cmd
       when: ansible_facts['os_family'] == "Darwin"
