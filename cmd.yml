@@ -43,5 +43,6 @@
         - "nmap"
         - "docker"
         - "docker-machine"
+        - "cmatrix"
       tags: cmd
       when: ansible_facts['os_family'] == "Darwin"
