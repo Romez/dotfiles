@@ -18,6 +18,7 @@
         src: /usr/bin/batcat
         dest: ~/.local/bin/bat
         state: link
+      when: ansible_facts['os_family'] == "Debian"
 
     - name: install neovim mac
       homebrew:

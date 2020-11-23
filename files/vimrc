@@ -133,6 +133,7 @@ let g:coc_global_extensions = [
       \ "coc-stylelintplus",
       \ "coc-tsserver",
       \ "coc-yaml",
+      \ "coc-python",
  \ ]
 
 " FZF
@@ -229,3 +230,6 @@ inoremap <S-C-j> <Esc>:m .+1<CR>==gi
 inoremap <S-C-k> <Esc>:m .-2<CR>==gi
 vnoremap <S-C-j> :m '>+1<CR>gv=gv
 vnoremap <S-C-k> :m '<-2<CR>gv=gv
+
+" test
+let test#strategy = "neovim"
