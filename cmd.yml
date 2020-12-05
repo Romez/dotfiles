@@ -24,6 +24,13 @@
         creates: ~/.nvm
       when: ansible_facts['os_family'] == "Debian"
 
+    - name: install heroku
+      become: true
+      snap:
+        name: heroku
+        classic: yes
+      when: ansible_facts['os_family'] == "Debian"
+
     - name: install cmd apps OSX
       homebrew:
         name: "{{ item }}" 
