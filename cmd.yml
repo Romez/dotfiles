@@ -51,5 +51,6 @@
         - "docker"
         - "docker-machine"
         - "cmatrix"
+        - "watch"
       tags: cmd
       when: ansible_facts['os_family'] == "Darwin"
