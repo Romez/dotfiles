@@ -52,5 +52,6 @@
         - "docker-machine"
         - "cmatrix"
         - "watch"
+        - "pgformatter"
       tags: cmd
       when: ansible_facts['os_family'] == "Darwin"
