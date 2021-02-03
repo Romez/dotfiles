@@ -12,3 +12,6 @@ desktop:
 
 cmd:
 	ansible-playbook cmd.yml
+
+emacs:
+	ansible-playbook emacs.yml

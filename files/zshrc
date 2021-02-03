@@ -19,6 +19,8 @@ alias python=/usr/local/bin/python3
 alias k='kubectl'
 alias mk='/usr/local/bin/minikube'
 
+alias spm='emacs -nw .'
+
 export FZF_DEFAULT_COMMAND='ag --path-to-ignore ~/.ignore --hidden -l -g ""'
 
 # set locale
