@@ -4,6 +4,9 @@ nvim:
 zsh:
 	ansible-playbook zsh.yml
 
+zsh-config:
+	ansible-playbook zsh.yml --tags config
+
 dotfiles:
 	ansible-playbook dotfiles.yml
 
