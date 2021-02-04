@@ -1,5 +1,4 @@
 ---
 - hosts: all
   tasks:
-    - import_tasks: tasks/dotfiles.yml
     - import_tasks: tasks/desktop.yml
