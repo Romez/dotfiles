@@ -53,5 +53,9 @@
         - "cmatrix"
         - "watch"
         - "pgformatter"
+        - "emacs"
+        - "leiningen"
+        - "clojure"
+        - "postgresql"
       tags: cmd
       when: ansible_facts['os_family'] == "Darwin"
