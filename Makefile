@@ -1,5 +1,5 @@
 nvim:
-	ansible-playbook nvim.yml 
+	ansible-playbook nvim.yml
 
 zsh:
 	ansible-playbook zsh.yml
