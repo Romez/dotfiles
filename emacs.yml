@@ -1,10 +1,11 @@
 ---
 - hosts: localhost
   tasks:
-    - name: copy spacemacs config
-      copy:
+    - name: "link .spacemacs"
+      file:
         src: files/.spacemacs
         dest: ~/.spacemacs
+        state: link
     - name: clone spacemacs
       git:
         repo: https://github.com/syl20bnr/spacemacs

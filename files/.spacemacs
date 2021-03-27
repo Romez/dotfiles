@@ -32,15 +32,20 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(ruby
+   '(typescript
+     vimscript
+     racket
+     ruby
      csv
      react
+     docker
      sql
      html
      yaml
      (clojure :variables
               clojure-enable-linters 'clj-kondo
-              cider-test-show-report-on-success t)
+              cider-test-show-report-on-success t
+              clojure-enable-clj-refactor t)
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
@@ -66,7 +71,9 @@ This function should only modify configuration layer settings."
      ;; syntax-checking
      version-control
      neotree
-     colors)
+     colors
+     (xclipboard :variables xclipboard-enable-cliphist t)
+     )
 
 
    ;; List of additional packages that will be installed without being wrapped
@@ -77,7 +84,12 @@ This function should only modify configuration layer settings."
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(flycheck-clj-kondo)
+   dotspacemacs-additional-packages '(flycheck-clj-kondo
+                                      all-the-icons
+                                      (jellybeans-plus-theme :location (recipe
+                                                                        :fetcher github
+                                                                        :repo "jsmestad/jellybeans-plus-theme"))
+                                      )
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -224,8 +236,11 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(ujelly
+   dotspacemacs-themes '(jellybeans-plus
                          spacemacs-dark
+                         monokai
+                         ujelly
+                         jbeans
                          spacemacs-light)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
@@ -498,6 +513,7 @@ It should only modify the values of Spacemacs settings."
 
 (setq sqlfmt-executable "pg_format")
 (setq sqlfmt-options '())
+(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
 
 (defun dotspacemacs/user-env ()
   "Environment variables setup.
@@ -512,8 +528,7 @@ See the header of this file for more information."
 This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
-If you are unsure, try setting them in `dotspacemacs/user-config' first."
-  )
+If you are unsure, try setting them in `dotspacemacs/user-config' first.")
 
 (defun dotspacemacs/user-load ()
   "Library to load while dumping.
@@ -529,10 +544,17 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
   (require 'flycheck-clj-kondo)
+  (require 'all-the-icons)
+
   (use-package clojure-mode
     :ensure t
     :config
-    (require 'flycheck-clj-kondo)))
+    (require 'flycheck-clj-kondo)
+    (require 'all-the-icons)
+    )
+
+  ;; (evil-define-key 'visual sp-forward-slurp-sexp "s" 'evil-substitute)
+  )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
@@ -546,9 +568,77 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-faces-vector
+   [default default default italic underline success warning error])
+ '(ansi-color-names-vector
+   ["#bcbcbc" "#d70008" "#5faf00" "#875f00" "#268bd2" "#800080" "#008080" "#5f5f87"])
+ '(background-color "#202020")
+ '(background-mode dark)
+ '(compilation-message-face 'default)
+ '(cursor-color "#cccccc")
  '(evil-want-Y-yank-to-eol nil)
+ '(fci-rule-color "#3C3D37")
+ '(foreground-color "#cccccc")
+ '(highlight-changes-colors '("#FD5FF0" "#AE81FF"))
+ '(highlight-tail-colors
+   '(("#3C3D37" . 0)
+     ("#679A01" . 20)
+     ("#4BBEAE" . 30)
+     ("#1DB4D0" . 50)
+     ("#9A8F21" . 60)
+     ("#A75B00" . 70)
+     ("#F309DF" . 85)
+     ("#3C3D37" . 100)))
+ '(hl-todo-keyword-faces
+   '(("TODO" . "#dc752f")
+     ("NEXT" . "#dc752f")
+     ("THEM" . "#2aa198")
+     ("PROG" . "#268bd2")
+     ("OKAY" . "#268bd2")
+     ("DONT" . "#d70008")
+     ("FAIL" . "#d70008")
+     ("DONE" . "#00af00")
+     ("NOTE" . "#875f00")
+     ("KLUDGE" . "#875f00")
+     ("HACK" . "#875f00")
+     ("TEMP" . "#875f00")
+     ("FIXME" . "#dc752f")
+     ("XXX+" . "#dc752f")
+     ("\\?\\?\\?+" . "#dc752f")))
+ '(magit-diff-use-overlays nil)
+ '(neo-theme 'icons)
+ '(notmuch-search-line-faces
+   '(("unread" :foreground "#aeee00")
+     ("flagged" :foreground "#0a9dff")
+     ("deleted" :foreground "#ff2c4b" :bold t)))
  '(package-selected-packages
-   '(seeing-is-believing rvm ruby-tools ruby-test-mode ruby-refactor ruby-hash-syntax rubocopfmt rubocop rspec-mode robe rbenv rake minitest enh-ruby-mode cfrs chruby bundler inf-ruby csv-mode jellybeans-plus-theme rjsx-mode lsp-ui lsp-origami origami helm-lsp company-quickhelp flycheck-clj-kondo helm helm-core tern nodejs-repl livid-mode skewer-mode js2-refactor multiple-cursors js2-mode js-doc import-js grizzl helm-gtags ggtags dap-mode posframe lsp-treemacs bui lsp-mode treemacs pfuture ht dash-functional counsel-gtags sqlup-mode sql-indent rainbow-mode rainbow-identifiers color-identifiers-mode web-mode web-beautify tagedit slim-mode scss-mode sass-mode pug-mode prettier-js impatient-mode htmlize simple-httpd helm-css-scss haml-mode emmet-mode counsel-css counsel swiper ivy company-web web-completion-data add-node-modules-path yasnippet-snippets helm-company helm-c-yasnippet fuzzy clojure-snippets auto-yasnippet yasnippet ac-ispell auto-complete smeargle magit-svn magit-section magit-gitflow magit-popup helm-gitignore helm-git-grep gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ fringe-helper git-gutter+ forge ghub closql emacsql-sqlite emacsql treepy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip evil-magit magit git-commit with-editor transient browse-at-remote auto-dictionary neotree vmd-mode mmm-mode markdown-toc markdown-mode gh-md emoji-cheat-sheet-plus company-emoji yaml-mode company ws-butler writeroom-mode winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org symon symbol-overlay string-inflection spaceline-all-the-icons restart-emacs request rainbow-delimiters popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless move-text macrostep lorem-ipsum link-hint indent-guide hybrid-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-ls-git helm-flx helm-descbinds helm-cider helm-ag google-translate golden-ratio font-lock+ flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu emr elisp-slime-nav editorconfig dumb-jump dotenv-mode diminish devdocs define-word column-enforce-mode clean-aindent-mode cider-eval-sexp-fu centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line)))
+   '(typescript-mode dockerfile-mode docker tablist docker-tramp vimrc-mode dactyl-mode racket-mode jbeans-theme noctilux-theme mustang-theme monokai-theme badwolf-theme treemacs-magit clj-refactor inflections seeing-is-believing rvm ruby-tools ruby-test-mode ruby-refactor ruby-hash-syntax rubocopfmt rubocop rspec-mode robe rbenv rake minitest enh-ruby-mode cfrs chruby bundler inf-ruby csv-mode jellybeans-plus-theme rjsx-mode lsp-ui lsp-origami origami helm-lsp company-quickhelp flycheck-clj-kondo helm helm-core tern nodejs-repl livid-mode skewer-mode js2-refactor multiple-cursors js2-mode js-doc import-js grizzl helm-gtags ggtags dap-mode posframe lsp-treemacs bui lsp-mode treemacs pfuture ht dash-functional counsel-gtags sqlup-mode sql-indent rainbow-mode rainbow-identifiers color-identifiers-mode web-mode web-beautify tagedit slim-mode scss-mode sass-mode pug-mode prettier-js impatient-mode htmlize simple-httpd helm-css-scss haml-mode emmet-mode counsel-css counsel swiper ivy company-web web-completion-data add-node-modules-path yasnippet-snippets helm-company helm-c-yasnippet fuzzy clojure-snippets auto-yasnippet yasnippet ac-ispell auto-complete smeargle magit-svn magit-section magit-gitflow magit-popup helm-gitignore helm-git-grep gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ fringe-helper git-gutter+ forge ghub closql emacsql-sqlite emacsql treepy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip evil-magit magit git-commit with-editor transient browse-at-remote auto-dictionary neotree vmd-mode mmm-mode markdown-toc markdown-mode gh-md emoji-cheat-sheet-plus company-emoji yaml-mode company ws-butler writeroom-mode winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org symon symbol-overlay string-inflection spaceline-all-the-icons restart-emacs request rainbow-delimiters popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless move-text macrostep lorem-ipsum link-hint indent-guide hybrid-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-ls-git helm-flx helm-descbinds helm-cider helm-ag google-translate golden-ratio font-lock+ flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu emr elisp-slime-nav editorconfig dumb-jump dotenv-mode diminish devdocs define-word column-enforce-mode clean-aindent-mode cider-eval-sexp-fu centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line))
+ '(pdf-view-midnight-colors '("#5f5f87" . "#ffffff"))
+ '(pos-tip-background-color "#FFFACE")
+ '(pos-tip-foreground-color "#272822")
+ '(vc-annotate-background nil)
+ '(vc-annotate-color-map
+   '((20 . "#F92672")
+     (40 . "#CF4F1F")
+     (60 . "#C26C0F")
+     (80 . "#E6DB74")
+     (100 . "#AB8C00")
+     (120 . "#A18F00")
+     (140 . "#989200")
+     (160 . "#8E9500")
+     (180 . "#A6E22E")
+     (200 . "#729A1E")
+     (220 . "#609C3C")
+     (240 . "#4E9D5B")
+     (260 . "#3C9F79")
+     (280 . "#A1EFE4")
+     (300 . "#299BA6")
+     (320 . "#2896B5")
+     (340 . "#2790C3")
+     (360 . "#66D9EF")))
+ '(vc-annotate-very-old-color nil)
+ '(weechat-color-list
+   '(unspecified "#272822" "#3C3D37" "#F70057" "#F92672" "#86C30D" "#A6E22E" "#BEB244" "#E6DB74" "#40CAE4" "#66D9EF" "#FB35EA" "#FD5FF0" "#74DBCD" "#A1EFE4" "#F8F8F2" "#F8F8F0")))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
