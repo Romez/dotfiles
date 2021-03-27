@@ -3,7 +3,7 @@
   tasks:
     - name: "link .spacemacs"
       file:
-        src: files/.spacemacs
+        src:  "{{playbook_dir}}/files/.spacemacs" 
         dest: ~/.spacemacs
         state: link
     - name: clone spacemacs
