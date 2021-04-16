@@ -39,6 +39,7 @@ This function should only modify configuration layer settings."
      csv
      react
      docker
+     racket
      sql
      html
      yaml
@@ -236,7 +237,8 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(jellybeans-plus
+   dotspacemacs-themes '(dracula
+                         jellybeans-plus
                          spacemacs-dark
                          monokai
                          ujelly
@@ -412,7 +414,12 @@ It should only modify the values of Spacemacs settings."
    ;;   :size-limit-kb 1000)
    ;; When used in a plist, `visual' takes precedence over `relative'.
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   ;; dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers '(:absolute t
+                                       :disabled-for-modes dired-mode
+                                       doc-view-mode
+                                       pdf-view-mode
+                                       :size-limit-kb 1000)
 
    ;; Code folding method. Possible values are `evil', `origami' and `vimish'.
    ;; (default 'evil)
