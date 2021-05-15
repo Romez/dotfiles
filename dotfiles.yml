@@ -25,3 +25,10 @@
       copy:
         src: files/.eslintignore
         dest: ~/.eslintignore
+
+    - name: "link lein profiles"
+      file:
+        src:  "{{playbook_dir}}/files/profiles.clj" 
+        dest: ~/.lein/profiles.clj
+        state: link
+

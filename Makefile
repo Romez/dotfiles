@@ -11,7 +11,7 @@ dotfiles:
 	ansible-playbook dotfiles.yml
 
 desktop:
-	ansible-playbook ansible/main.yml -i ansible/inventory -vv --tags "desktop"
+	ansible-playbook desktop.yml
 
 cmd:
 	ansible-playbook cmd.yml
