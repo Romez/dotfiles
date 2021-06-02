@@ -32,50 +32,55 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(typescript
-     vimscript
-     racket
-     ruby
-     csv
+   '(yaml
      react
-     docker
-     racket
-     sql
+     clojure
+     ;; typescript
+     ;; vimscript
+     ;; racket
+     ;; ruby
+     ;; csv
+     ;; react
+     ;; parinfer
+     ;; docker
+     ;; sql
      html
-     yaml
+     ;; yaml
      (clojure :variables
               clojure-enable-linters 'clj-kondo
-              cider-test-show-report-on-success t
+              ;; cider-test-show-report-on-success t
+              ;; clojure-enable-fancify-symbols t
               clojure-enable-clj-refactor t)
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     (auto-completion :variables
-                      auto-completion-enable-help-tooltip t
-                      auto-completion-enable-snippets-in-popup t)
+     auto-completion
+                      ;; auto-completion-idle-delay nil
+                      ;; auto-completion-enable-help-tooltip t)
+                      ;; #_#_auto-completion-enable-snippets-in-popup t)
+                      ;; auto-completion-use-company-box t)
+
      ;; better-defaults
-     emacs-lisp
+     ;; emacs-lisp
      git
-     helm
+     ;; helm
      ;; lsp
      (markdown :variables markdown-live-preview-engine 'vmd)
-     (javascript :variables javascript-import-tool 'import-js
-                            javascript-fmt-tool 'prettier)
-     multiple-cursors
+     ;; (javascript :variables javascript-import-tool 'import-js
+     ;;                        javascript-fmt-tool 'prettier)
+     ;; multiple-cursors
      ;; org
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
      ;; spell-checking
-     ;; syntax-checking
+     syntax-checking
      version-control
      neotree
      colors
-     (xclipboard :variables xclipboard-enable-cliphist t)
-     )
-
+     (xclipboard :variables xclipboard-enable-cliphist t))
 
    ;; List of additional packages that will be installed without being wrapped
    ;; in a layer (generally the packages are installed only and should still be
@@ -89,14 +94,14 @@ This function should only modify configuration layer settings."
                                       all-the-icons
                                       (jellybeans-plus-theme :location (recipe
                                                                         :fetcher github
-                                                                        :repo "jsmestad/jellybeans-plus-theme"))
-                                      )
+                                                                        :repo "jsmestad/jellybeans-plus-theme")))
+                                      
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
 
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '()
+   ;; dotspacemacs-excluded-packages '(smartparens)
 
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
@@ -237,8 +242,8 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(dracula
-                         jellybeans-plus
+   dotspacemacs-themes '(jellybeans-plus
+                         dracula
                          spacemacs-dark
                          monokai
                          ujelly
@@ -561,6 +566,65 @@ before packages are loaded."
     )
 
   ;; (evil-define-key 'visual sp-forward-slurp-sexp "s" 'evil-substitute)
+
+  ;; Resize font
+  (define-key global-map (kbd "C-+") 'text-scale-increase)
+  (define-key global-map (kbd "C--") 'text-scale-decrease)
+
+  ;; Helm configurations
+  (setq projectile-use-git-grep 1) ;; Don't grep files listed in .gitignore
+
+  ;; Setup smartparens
+  (add-hook 'clojure-mode-hook 'turn-on-smartparens-strict-mode)
+  (bind-keys
+   :map smartparens-mode-map
+   ("C-M-a" . sp-beginning-of-sexp)
+   ("C-M-e" . sp-end-of-sexp)
+
+   ;("C-<down>" . sp-down-sexp)
+   ;("C-<up>"   . sp-up-sexp)
+   ;("M-<down>" . sp-backward-down-sexp)
+   ;("M-<up>"   . sp-backward-up-sexp)
+
+   ;; ("C-M-f" . sp-forward-sexp)
+   ;; ("C-M-b" . sp-backward-sexp)
+
+   ;; ("C-M-n" . sp-next-sexp)
+   ;; ("C-M-p" . sp-previous-sexp)
+
+   ;; ("C-S-f" . sp-forward-symbol)
+   ;; ("C-S-b" . sp-backward-symbol)
+
+   ("M-<right>" . sp-forward-slurp-sexp)
+   ("M-<left>" . sp-forward-barf-sexp)
+   ;; ;("C-<left>"  . sp-backward-slurp-sexp)
+   ;; ;("M-<left>"  . sp-backward-barf-sexp)
+
+   ;; ("C-M-t" . sp-transpose-sexp)
+   ;; ("C-M-k" . sp-kill-sexp)
+   ;; ("C-k"   . sp-kill-hybrid-sexp)
+   ;; ("M-k"   . sp-backward-kill-sexp)
+   ;; ("C-M-w" . sp-copy-sexp)
+
+   ;; ("C-M-d" . delete-sexp)
+
+   ;; ("M-<backspace>" . backward-kill-word)
+   ;; ("C-<backspace>" . sp-backward-kill-word)
+   ;; ([remap sp-backward-kill-word] . backward-kill-word)
+
+   ;; ("M-[" . sp-backward-unwrap-sexp)
+   ;; ("M-]" . sp-unwrap-sexp)
+
+   ;; ("C-x C-t" . sp-transpose-hybrid-sexp)
+
+   ("C-c ("  . wrap-with-parens)
+   ("C-c ["  . wrap-with-brackets)
+   ("C-c {"  . wrap-with-braces)
+   ;; ("C-c '"  . wrap-with-single-quotes)
+   ;; ("C-c \"" . wrap-with-double-quotes)
+   ;; ("C-c _"  . wrap-with-underscores)
+   ;; ("C-c `"  . wrap-with-back-quotes)
+   )
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -619,7 +683,7 @@ This function is called at the very end of Spacemacs initialization."
      ("flagged" :foreground "#0a9dff")
      ("deleted" :foreground "#ff2c4b" :bold t)))
  '(package-selected-packages
-   '(typescript-mode dockerfile-mode docker tablist docker-tramp vimrc-mode dactyl-mode racket-mode jbeans-theme noctilux-theme mustang-theme monokai-theme badwolf-theme treemacs-magit clj-refactor inflections seeing-is-believing rvm ruby-tools ruby-test-mode ruby-refactor ruby-hash-syntax rubocopfmt rubocop rspec-mode robe rbenv rake minitest enh-ruby-mode cfrs chruby bundler inf-ruby csv-mode jellybeans-plus-theme rjsx-mode lsp-ui lsp-origami origami helm-lsp company-quickhelp flycheck-clj-kondo helm helm-core tern nodejs-repl livid-mode skewer-mode js2-refactor multiple-cursors js2-mode js-doc import-js grizzl helm-gtags ggtags dap-mode posframe lsp-treemacs bui lsp-mode treemacs pfuture ht dash-functional counsel-gtags sqlup-mode sql-indent rainbow-mode rainbow-identifiers color-identifiers-mode web-mode web-beautify tagedit slim-mode scss-mode sass-mode pug-mode prettier-js impatient-mode htmlize simple-httpd helm-css-scss haml-mode emmet-mode counsel-css counsel swiper ivy company-web web-completion-data add-node-modules-path yasnippet-snippets helm-company helm-c-yasnippet fuzzy clojure-snippets auto-yasnippet yasnippet ac-ispell auto-complete smeargle magit-svn magit-section magit-gitflow magit-popup helm-gitignore helm-git-grep gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ fringe-helper git-gutter+ forge ghub closql emacsql-sqlite emacsql treepy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip evil-magit magit git-commit with-editor transient browse-at-remote auto-dictionary neotree vmd-mode mmm-mode markdown-toc markdown-mode gh-md emoji-cheat-sheet-plus company-emoji yaml-mode company ws-butler writeroom-mode winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org symon symbol-overlay string-inflection spaceline-all-the-icons restart-emacs request rainbow-delimiters popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless move-text macrostep lorem-ipsum link-hint indent-guide hybrid-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-ls-git helm-flx helm-descbinds helm-cider helm-ag google-translate golden-ratio font-lock+ flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu emr elisp-slime-nav editorconfig dumb-jump dotenv-mode diminish devdocs define-word column-enforce-mode clean-aindent-mode cider-eval-sexp-fu centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line))
+   '(a typescript-mode dockerfile-mode docker tablist docker-tramp vimrc-mode dactyl-mode racket-mode jbeans-theme noctilux-theme mustang-theme monokai-theme badwolf-theme treemacs-magit clj-refactor inflections seeing-is-believing rvm ruby-tools ruby-test-mode ruby-refactor ruby-hash-syntax rubocopfmt rubocop rspec-mode robe rbenv rake minitest enh-ruby-mode cfrs chruby bundler inf-ruby csv-mode jellybeans-plus-theme rjsx-mode lsp-ui lsp-origami origami helm-lsp company-quickhelp flycheck-clj-kondo helm helm-core tern nodejs-repl livid-mode skewer-mode js2-refactor multiple-cursors js2-mode js-doc import-js grizzl helm-gtags ggtags dap-mode posframe lsp-treemacs bui lsp-mode treemacs pfuture ht dash-functional counsel-gtags sqlup-mode sql-indent rainbow-mode rainbow-identifiers color-identifiers-mode web-mode web-beautify tagedit slim-mode scss-mode sass-mode pug-mode prettier-js impatient-mode htmlize simple-httpd helm-css-scss haml-mode emmet-mode counsel-css counsel swiper ivy company-web web-completion-data add-node-modules-path yasnippet-snippets helm-company helm-c-yasnippet fuzzy clojure-snippets auto-yasnippet yasnippet ac-ispell auto-complete smeargle magit-svn magit-section magit-gitflow magit-popup helm-gitignore helm-git-grep gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ fringe-helper git-gutter+ forge ghub closql emacsql-sqlite emacsql treepy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip evil-magit magit git-commit with-editor transient browse-at-remote auto-dictionary neotree vmd-mode mmm-mode markdown-toc markdown-mode gh-md emoji-cheat-sheet-plus company-emoji yaml-mode company ws-butler writeroom-mode winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org symon symbol-overlay string-inflection spaceline-all-the-icons restart-emacs request rainbow-delimiters popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless move-text macrostep lorem-ipsum link-hint indent-guide hybrid-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-ls-git helm-flx helm-descbinds helm-cider helm-ag google-translate golden-ratio font-lock+ flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu emr elisp-slime-nav editorconfig dumb-jump dotenv-mode diminish devdocs define-word column-enforce-mode clean-aindent-mode cider-eval-sexp-fu centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line))
  '(pdf-view-midnight-colors '("#5f5f87" . "#ffffff"))
  '(pos-tip-background-color "#FFFACE")
  '(pos-tip-foreground-color "#272822")
@@ -652,4 +716,24 @@ This function is called at the very end of Spacemacs initialization."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ 
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ 
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ 
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ 
 )
