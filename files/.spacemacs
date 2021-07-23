@@ -32,7 +32,8 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(yaml
+   '(csv
+     yaml
      react
      clojure
      ;; typescript
@@ -570,6 +571,13 @@ before packages are loaded."
   ;; Resize font
   (define-key global-map (kbd "C-+") 'text-scale-increase)
   (define-key global-map (kbd "C--") 'text-scale-decrease)
+
+  (setq cider-print-options '(("length" 50)
+                              ("right-margin" 70)
+                              ("clojure.core/print-length" 50)))
+
+  (setq cider-repl-print-length 100)
+
 
   ;; Helm configurations
   (setq projectile-use-git-grep 1) ;; Don't grep files listed in .gitignore

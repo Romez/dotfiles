@@ -21,6 +21,8 @@ alias mk='/usr/local/bin/minikube'
 
 alias spm='emacs -nw .'
 
+alias m='make'
+
 export FZF_DEFAULT_COMMAND='ag --path-to-ignore ~/.ignore --hidden -l -g ""'
 
 # set locale
