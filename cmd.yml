@@ -60,5 +60,7 @@
         - "minikube"
         - "borkdude/brew/clj-kondo"
         - "krew"
+        - "go"
+
       tags: cmd
       when: ansible_facts['os_family'] == "Darwin"
