@@ -1,6 +1,9 @@
 nvim:
 	ansible-playbook nvim.yml
 
+spacevim:
+	ansible-playbook spacevim.yaml
+
 zsh:
 	ansible-playbook zsh.yml
 

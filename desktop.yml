@@ -5,9 +5,9 @@
         name: "{{ item }}"
         state: latest
       loop: [
-        "google-chrome",
-        "firefox",
-        "1password",
+        # "google-chrome",
+        # "firefox",
+        # "1password",
         "skype",
         "telegram",
         "slack",

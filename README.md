@@ -11,3 +11,9 @@ make dotfiles
 
 ### setup nvim
 make vim
+
+
+iterm
+-> 0x1b 0x66
+
+<- 0x1b 0x62

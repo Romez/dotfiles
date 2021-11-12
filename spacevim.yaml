@@ -1,0 +1,8 @@
+---
+- hosts: localhost
+  tasks:
+    - name: add spacevim init.toml
+      file:
+        src: "{{playbook_dir}}/files/init.toml"
+        dest: ~/.SpaceVim.d/init.toml
+        state: link
