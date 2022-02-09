@@ -45,5 +45,5 @@ compinit
 eval "$(starship init zsh)"
 
 export PATH="${PATH}:${HOME}/.krew/bin"
-export PATH=$PATH:$(go env GOPATH)/b
 export PATH="$HOME/bin:$PATH"
+export PATH="$PATH:$(go env GOPATH)/bin"

@@ -58,7 +58,7 @@
         - "clojure"
         - "postgresql"
         - "minikube"
-        # - "borkdude/brew/clj-kondo"
+        - "borkdude/brew/clj-kondo"
         - "starship"
         - "krew"
         - "go"
