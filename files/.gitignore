@@ -5,3 +5,5 @@ tags.*
 *.retry
 .lvimrc
 .lsp
+.karma
+.clj-kondo/.cache
