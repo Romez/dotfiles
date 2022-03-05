@@ -62,6 +62,7 @@
         - "starship"
         - "krew"
         - "go"
+        - "awscli"
 
       tags: cmd
       when: ansible_facts['os_family'] == "Darwin"
