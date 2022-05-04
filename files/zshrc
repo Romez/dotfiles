@@ -4,23 +4,20 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-ZSH_THEME="robbyrussell"
-
 plugins=(git nvm npm mvn docker docker-compose kubectl)
+
+ZSH_THEME="robbyrussell"
 
 export ZSH=$HOME/.oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
-export EDITOR='vim'
+export EDITOR='emacs'
 
 alias cl='clear'
 alias python=/usr/local/bin/python3
 
 alias k='kubectl'
 alias mk='/usr/local/bin/minikube'
-
-alias spm='emacs -nw .'
-
 alias m='make'
 
 export FZF_DEFAULT_COMMAND='ag --path-to-ignore ~/.ignore --hidden -l -g ""'
@@ -41,8 +38,6 @@ if [ -f '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion
 
 autoload -Uz compinit
 compinit
-
-eval "$(starship init zsh)"
 
 export PATH="${PATH}:${HOME}/.krew/bin"
 export PATH="$HOME/bin:$PATH"

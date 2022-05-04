@@ -63,6 +63,7 @@
         - "krew"
         - "go"
         - "awscli"
+        - "jq
 
       tags: cmd
       when: ansible_facts['os_family'] == "Darwin"

@@ -1,0 +1,88 @@
+(require 'package)
+
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+
+(package-initialize)
+
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+(use-package which-key
+	     :ensure t
+	     :config (which-key-mode))
+
+(use-package dracula-theme
+	     :ensure t
+	     :config (load-theme 'dracula t))
+
+(use-package helm
+  :ensure t
+  :config
+  (helm-mode 1)
+  (global-set-key (kbd "M-x") 'helm-M-x)
+  (global-set-key (kbd "C-x b") 'helm-buffers-list)
+  (global-set-key (kbd "C-x C-f") 'helm-find-files)
+  (global-set-key (kbd "C-s") 'helm-occur))
+
+(use-package projectile
+  :ensure t
+  :config
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (projectile-mode +1)
+  (projectile-register-project-type 'racket '("info.rkt")
+                                  :project-file "info.rkt"
+                                  :test "raco test ."
+                                  :install "raco pkg install"
+                                  :package "raco pkg create --source $(pwd)"
+				  :test-suffix "_test")
+  )
+
+(use-package helm-projectile
+  :ensure t
+  :config (helm-projectile-on))
+
+(use-package company
+  :ensure t
+  :hook ((after-init . global-company-mode)))
+
+(use-package paredit
+  :ensure t
+  :hook ((cider-repl-mode . paredit-mode)
+         (cider-mode . paredit-mode)
+         (clojure-mode . paredit-mode))
+  :bind (:map paredit-mode-map
+	      ("C-c s" . paredit-forward-slurp-sexp)
+	      ("C-c b" . paredit-forward-barf-sexp)))
+
+(use-package racket-mode
+  :ensure t)
+
+(setq backup-directory-alist `(("." . "~/.saves")))
+
+(setq inhibit-startup-message t)
+
+(menu-bar-mode -1)
+
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+
+(show-paren-mode 1)
+
+;(custom-set-variables
+; '(package-selected-packages
+;   '(paredit company helm-projectile helm which-key use-package racket-mode projectile markdown-mode dracula-theme cider ag)))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("1436985fac77baf06193993d88fa7d6b358ad7d600c1e52d12e64a2f07f07176" default))
+ '(package-selected-packages
+   '(helm-ag which-key use-package racket-mode paredit markdown-mode helm-projectile dracula-theme company cider ag)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

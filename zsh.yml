@@ -20,7 +20,7 @@
       tags:
         - config
             
-    - name: set zsh as shell
+    - name: set zsh as default shell
       user:
         name: "{{ ansible_user_id }}"
         shell: /bin/zsh

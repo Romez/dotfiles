@@ -1,12 +1,8 @@
 ---
 - hosts: localhost
   tasks:
-    - name: "link .spacemacs"
+    - name: "create config link in home directory"
       file:
-        src:  "{{playbook_dir}}/files/.spacemacs" 
-        dest: ~/.spacemacs
+        src:  "{{playbook_dir}}/files/.emacs" 
+        dest: ~/.emacs
         state: link
-    - name: clone spacemacs
-      git:
-        repo: https://github.com/syl20bnr/spacemacs
-        dest: ~/.emacs.d

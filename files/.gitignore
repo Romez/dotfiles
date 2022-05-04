@@ -7,3 +7,5 @@ tags.*
 .lsp
 .karma
 .clj-kondo/.cache
+.cpcache/
+.nrepl-port
