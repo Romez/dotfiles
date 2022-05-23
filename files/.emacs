@@ -31,12 +31,11 @@
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (projectile-mode +1)
   (projectile-register-project-type 'racket '("info.rkt")
-                                  :project-file "info.rkt"
-                                  :test "raco test ."
-                                  :install "raco pkg install"
-                                  :package "raco pkg create --source $(pwd)"
-				  :test-suffix "_test")
-  )
+                                    :project-file "info.rkt"
+                                    :test "raco test ."
+                                    :install "raco pkg install"
+                                    :package "raco pkg create --source $(pwd)"
+				    :test-suffix "_test"))
 
 (use-package helm-projectile
   :ensure t
@@ -53,9 +52,19 @@
          (clojure-mode . paredit-mode))
   :bind (:map paredit-mode-map
 	      ("C-c s" . paredit-forward-slurp-sexp)
-	      ("C-c b" . paredit-forward-barf-sexp)))
+	      ("C-c b" . paredit-forward-barf-sexp))
+  :config (dolist (m '(emacs-lisp-mode-hook
+		       racket-mode-hook
+		       racket-repl-mode-hook))
+	    (add-hook m #'paredit-mode)))
 
 (use-package racket-mode
+  :ensure t
+  :config
+  (require 'racket-xp)
+  (add-hook 'racket-mode-hook #'racket-xp-mode))
+
+(use-package yaml-mode
   :ensure t)
 
 (setq backup-directory-alist `(("." . "~/.saves")))
@@ -76,10 +85,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-enabled-themes '(dracula))
  '(custom-safe-themes
    '("1436985fac77baf06193993d88fa7d6b358ad7d600c1e52d12e64a2f07f07176" default))
  '(package-selected-packages
-   '(helm-ag which-key use-package racket-mode paredit markdown-mode helm-projectile dracula-theme company cider ag)))
+   '(yaml-mode helm-ag which-key use-package racket-mode paredit markdown-mode helm-projectile dracula-theme company cider ag)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
