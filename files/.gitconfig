@@ -14,3 +14,6 @@
   hist = log --pretty=format:\"%s (%an) %h\" --graph
   type = cat-file -t
   dump = cat-file -p<Paste>
+
+[url "git@github.all-street:/all-street"]
+    insteadOf = git@github.com:all-street

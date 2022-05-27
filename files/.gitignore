@@ -11,3 +11,4 @@ tags.*
 .nrepl-port
 .lein-repl-history
 .projectile
+.lein-failures
