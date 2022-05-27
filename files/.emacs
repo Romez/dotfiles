@@ -67,6 +67,29 @@
 (use-package yaml-mode
   :ensure t)
 
+(defun my-clojure-mode-hook ()
+    (clj-refactor-mode 1)
+    (yas-minor-mode 1) ; for adding require/use/import statements
+    ;; This choice of keybinding leaves cider-macroexpand-1 unbound
+    (cljr-add-keybindings-with-prefix "C-c C-m"))
+
+(use-package clj-refactor
+  :ensure t
+  :config
+  (add-hook 'clojure-mode-hook #'my-clojure-mode-hook))
+
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
+
+(use-package flycheck-clj-kondo
+  :ensure t)
+
+(use-package clojure-mode
+  :ensure t
+  :config
+  (require 'flycheck-clj-kondo))
+
 (setq backup-directory-alist `(("." . "~/.saves")))
 
 (setq inhibit-startup-message t)
@@ -77,9 +100,6 @@
 
 (show-paren-mode 1)
 
-;(custom-set-variables
-; '(package-selected-packages
-;   '(paredit company helm-projectile helm which-key use-package racket-mode projectile markdown-mode dracula-theme cider ag)))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -89,7 +109,8 @@
  '(custom-safe-themes
    '("1436985fac77baf06193993d88fa7d6b358ad7d600c1e52d12e64a2f07f07176" default))
  '(package-selected-packages
-   '(yaml-mode helm-ag which-key use-package racket-mode paredit markdown-mode helm-projectile dracula-theme company cider ag)))
+   '(flycheck flycheck-clj-kondo clj-refactor yaml-mode helm-ag which-key use-package racket-mode paredit markdown-mode helm-projectile dracula-theme company cider ag)))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

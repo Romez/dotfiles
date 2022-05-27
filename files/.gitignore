@@ -9,3 +9,5 @@ tags.*
 .clj-kondo/.cache
 .cpcache/
 .nrepl-port
+.lein-repl-history
+.projectile
