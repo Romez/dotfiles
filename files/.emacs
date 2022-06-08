@@ -1,4 +1,12 @@
+;;; .emacs --- My custom config
+
+;;; Commentary: Emacs Startup File --- initialization for Emacs
+
+;;; Commentary:
+
 (require 'package)
+
+;;; Code:
 
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 
@@ -100,20 +108,30 @@
 
 (show-paren-mode 1)
 
+;; increase messages buffer sieze
+(setq message-log-max 20000)
+
+(defun cider-reset ()
+  (interactive)
+  (cider-interactive-eval "(require 'dev)(dev/reset)"))
+
+(global-set-key (kbd "C-x C-j") 'cider-reset)
+
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes '(dracula))
  '(custom-safe-themes
-   '("1436985fac77baf06193993d88fa7d6b358ad7d600c1e52d12e64a2f07f07176" default))
- '(package-selected-packages
-   '(flycheck flycheck-clj-kondo clj-refactor yaml-mode helm-ag which-key use-package racket-mode paredit markdown-mode helm-projectile dracula-theme company cider ag)))
-
+   '("1436985fac77baf06193993d88fa7d6b358ad7d600c1e52d12e64a2f07f07176" default)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(provide '.emacs)
+
+;;; .emacs ends here
