@@ -12,3 +12,4 @@ tags.*
 .lein-repl-history
 .projectile
 .lein-failures
+node_modules

@@ -6,10 +6,11 @@
         src: files/.gitconfig
         dest: ~/.gitconfig
 
-    - name: copy gitignore
-      copy:
-        src: files/.gitignore
+    - name: link gitignore
+      file:
+        src: "{{playbook_dir}}/files/.gitignore"
         dest: ~/.gitignore
+        state: link
 
     - name: copy hgrc
       copy:
