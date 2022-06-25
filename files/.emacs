@@ -98,6 +98,9 @@
   :config
   (require 'flycheck-clj-kondo))
 
+(use-package emmet-mode
+  :ensure t)
+
 (setq backup-directory-alist `(("." . "~/.saves")))
 
 (setq inhibit-startup-message t)
@@ -110,6 +113,8 @@
 
 ;; increase messages buffer sieze
 (setq message-log-max 20000)
+
+(setq show-trailing-whitespace t)
 
 (defun cider-reset ()
   (interactive)
@@ -124,7 +129,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("1436985fac77baf06193993d88fa7d6b358ad7d600c1e52d12e64a2f07f07176" default)))
+   '("1436985fac77baf06193993d88fa7d6b358ad7d600c1e52d12e64a2f07f07176" default))
+ '(package-selected-packages
+   '(emmet-mode yaml-mode which-key use-package racket-mode markdown-mode helm-projectile helm-ag flycheck-clj-kondo dracula-theme company clj-refactor ag)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
