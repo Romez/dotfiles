@@ -88,7 +88,21 @@
 
 (use-package flycheck
   :ensure t
-  :init (global-flycheck-mode))
+  :init
+  (global-flycheck-mode)
+    ;; Overwrite existing scss-stylelint checker to not use --syntax
+  (flycheck-define-checker scss-stylelint
+  "A SCSS syntax and style checker using stylelint.
+
+See URL `http://stylelint.io/'."
+  :command ("stylelint"
+            (eval flycheck-stylelint-args)
+;; "--syntax" "scss"
+            (option-flag "--quiet" flycheck-stylelint-quiet)
+            (config-file "--config" flycheck-stylelintrc))
+  :standard-input t
+  :error-parser flycheck-parse-stylelint
+  :modes (scss-mode)))
 
 (use-package flycheck-clj-kondo
   :ensure t)
@@ -98,8 +112,18 @@
   :config
   (require 'flycheck-clj-kondo))
 
+(use-package json-mode
+  :ensure t)
+
 (use-package emmet-mode
   :ensure t)
+
+(use-package magit
+  :ensure t)
+
+(use-package git-gutter
+  :ensure t
+  :config (global-git-gutter-mode +1))
 
 (setq backup-directory-alist `(("." . "~/.saves")))
 
@@ -121,23 +145,6 @@
   (cider-interactive-eval "(require 'dev)(dev/reset)"))
 
 (global-set-key (kbd "C-x C-j") 'cider-reset)
-
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("1436985fac77baf06193993d88fa7d6b358ad7d600c1e52d12e64a2f07f07176" default))
- '(package-selected-packages
-   '(emmet-mode yaml-mode which-key use-package racket-mode markdown-mode helm-projectile helm-ag flycheck-clj-kondo dracula-theme company clj-refactor ag)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
 
 (provide '.emacs)
 
