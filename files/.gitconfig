@@ -3,7 +3,7 @@
 	name = roman_ushakov
 [core]
 	fileMode = false
-	editor = vim
+	editor = emacs -nw
   excludesfile = ~/.gitignore
 
 [alias]

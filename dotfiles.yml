@@ -1,10 +1,11 @@
 ---
 - hosts: localhost
   tasks:
-    - name: copy gitconfig
-      copy:
-        src: files/.gitconfig
+    - name: link gitconfig
+      file:
+        src: "{{playbook_dir}}/files/.gitconfig"
         dest: ~/.gitconfig
+        state: link
 
     - name: link gitignore
       file:
