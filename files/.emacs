@@ -47,7 +47,9 @@
 
 (use-package helm-projectile
   :ensure t
-  :config (helm-projectile-on))
+  :config
+  (helm-projectile-on)
+  (setq helm-follow-mode-persistent t))
 
 (use-package company
   :ensure t
