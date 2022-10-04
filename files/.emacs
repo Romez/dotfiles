@@ -51,6 +51,9 @@
   (helm-projectile-on)
   (setq helm-follow-mode-persistent t))
 
+(use-package helm-ag
+  :ensure t)
+
 (use-package company
   :ensure t
   :hook ((after-init . global-company-mode)))
@@ -117,15 +120,15 @@ See URL `http://stylelint.io/'."
 (use-package json-mode
   :ensure t)
 
-(use-package emmet-mode
-  :ensure t)
-
 (use-package magit
   :ensure t)
 
 (use-package git-gutter
   :ensure t
   :config (global-git-gutter-mode +1))
+
+(use-package elm-mode
+  :ensure t)
 
 (setq backup-directory-alist `(("." . "~/.saves")))
 
@@ -151,3 +154,17 @@ See URL `http://stylelint.io/'."
 (provide '.emacs)
 
 ;;; .emacs ends here
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(elm-mode yaml-mode which-key use-package racket-mode markdown-mode magit json-mode helm-projectile helm-ag git-gutter flycheck-clj-kondo emmet-mode dracula-theme company clj-refactor ag))
+ '(warning-suppress-log-types '((emacs))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
