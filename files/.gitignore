@@ -13,3 +13,4 @@ tags.*
 .projectile
 .lein-failures
 node_modules
+.vscode
