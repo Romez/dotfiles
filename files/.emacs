@@ -151,6 +151,8 @@ See URL `http://stylelint.io/'."
 
 (global-set-key (kbd "C-x C-j") 'cider-reset)
 
+(global-prettify-symbols-mode 1)
+
 (provide '.emacs)
 
 ;;; .emacs ends here
