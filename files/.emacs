@@ -1,4 +1,4 @@
-;;; .emacs --- My custom config
+;;; .emacs --- My config
 
 ;;; Commentary: Emacs Startup File --- initialization for Emacs
 
@@ -26,12 +26,35 @@
 
 (use-package helm
   :ensure t
+  :demand t
+  :init
+  ;; Set helm prefix key
+  (setq helm-command-prefix-key "C-c h")
+  :bind
+  (("M-x" . helm-M-x)
+   ("C-x C-f" . helm-find-files)
+   ("C-x b" . helm-mini)
+   ("M-y" . helm-show-kill-ring)
+   ("C-x C-b" . helm-buffers-list)
+   ("C-c h o" . helm-occur)
+   ("C-c h x" . helm-register)
+   ("C-c h g" . helm-do-grep-ag)
+   ;; Map C-x r b to register bookmarks in Helm
+   ("C-x r b" . helm-filtered-bookmarks)
+   ;; To find recent files using Helm, bind previous key map C-x C-r to helm-recentf
+   ("C-x C-r" . helm-recentf)
+   ;; To resume last Helm session, bind it to the previous key map C-c h h
+   ("C-c h h" . helm-resume))
   :config
+  ;; Enable helm-mode automatically
   (helm-mode 1)
-  (global-set-key (kbd "M-x") 'helm-M-x)
-  (global-set-key (kbd "C-x b") 'helm-buffers-list)
-  (global-set-key (kbd "C-x C-f") 'helm-find-files)
-  (global-set-key (kbd "C-s") 'helm-occur))
+  (setq helm-M-x-fuzzy-match t)
+  (setq helm-buffers-fuzzy-matching t)
+  (setq helm-recentf-fuzzy-match t)
+  (setq helm-semantic-fuzzy-match t)
+  (setq helm-imenu-fuzzy-match t))
+
+(global-set-key (kbd "C-c h o") 'helm-occur)
 
 (use-package projectile
   :ensure t
@@ -39,17 +62,22 @@
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (projectile-mode +1)
   (projectile-register-project-type 'racket '("info.rkt")
-                                    :project-file "info.rkt"
-                                    :test "raco test ."
-                                    :install "raco pkg install"
-                                    :package "raco pkg create --source $(pwd)"
+				    :project-file "info.rkt"
+				    :test "raco test ."
+				    :install "raco pkg install"
+				    :package "raco pkg create --source $(pwd)"
 				    :test-suffix "_test"))
+
+(setq projectile-globally-ignored-directories
+      '(".git" "node_modules" "venv" "build"))
+
+(setq projectile-globally-ignored-directories
+      '(".git" "node_modules" "venv" "build" "class"))
 
 (use-package helm-projectile
   :ensure t
   :config
-  (helm-projectile-on)
-  (setq helm-follow-mode-persistent t))
+  (helm-projectile-on))
 
 (use-package helm-ag
   :ensure t)
@@ -79,17 +107,6 @@
 
 (use-package yaml-mode
   :ensure t)
-
-(defun my-clojure-mode-hook ()
-    (clj-refactor-mode 1)
-    (yas-minor-mode 1) ; for adding require/use/import statements
-    ;; This choice of keybinding leaves cider-macroexpand-1 unbound
-    (cljr-add-keybindings-with-prefix "C-c C-m"))
-
-(use-package clj-refactor
-  :ensure t
-  :config
-  (add-hook 'clojure-mode-hook #'my-clojure-mode-hook))
 
 (use-package flycheck
   :ensure t
@@ -130,25 +147,6 @@ See URL `http://stylelint.io/'."
 (use-package elm-mode
   :ensure t)
 
-(use-package origami
-  :ensure t
-  :config
-  (define-key global-map (kbd "C-x C-z") 'origami-mode-map)
-  (define-prefix-command 'origami-mode-map)
-  (define-key origami-mode-map (kbd "o") 'origami-open-node)
-  (define-key origami-mode-map (kbd "O") 'origami-open-node-recursively)
-  (define-key origami-mode-map (kbd "c") 'origami-close-node)
-  (define-key origami-mode-map (kbd "C") 'origami-close-node-recursively)
-  (define-key origami-mode-map (kbd "a") 'origami-toggle-node)
-  (define-key origami-mode-map (kbd "A") 'origami-recursively-toggle-node)
-  (define-key origami-mode-map (kbd "R") 'origami-open-all-nodes)
-  (define-key origami-mode-map (kbd "M") 'origami-close-all-nodes)
-  (define-key origami-mode-map (kbd "v") 'origami-show-only-node)
-  (define-key origami-mode-map (kbd "k") 'origami-previous-fold)
-  (define-key origami-mode-map (kbd "j") 'origami-forward-fold)
-  (define-key origami-mode-map (kbd "x") 'origami-reset)  
-  )
-
 (setq backup-directory-alist `(("." . "~/.saves")))
 
 (setq inhibit-startup-message t)
@@ -162,15 +160,15 @@ See URL `http://stylelint.io/'."
 ;; increase messages buffer sieze
 (setq message-log-max 20000)
 
-(setq show-trailing-whitespace t)
-
-(defun cider-reset ()
-  (interactive)
-  (cider-interactive-eval "(require 'dev)(dev/reset)"))
-
-(global-set-key (kbd "C-x C-j") 'cider-reset)
-
 (global-prettify-symbols-mode 1)
+
+;; To enable whitespace-mode globally
+(global-whitespace-mode 1)
+
+;; Set whitespace-mode to highlight lines longer than 120 characters
+(setq whitespace-line-column 120)
+
+(setq insert-directory-program "gls")
 
 (provide '.emacs)
 
@@ -180,8 +178,10 @@ See URL `http://stylelint.io/'."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("f25f174e4e3dbccfcb468b8123454b3c61ba94a7ae0a870905141b050ad94b8f" "ce784eb8135893a19e5553ed94cc694320b05228ce712a64b2fb69c0c54161b9" "e9d47d6d41e42a8313c81995a60b2af6588e9f01a1cf19ca42669a7ffd5c2fde" "6108bcd711f66fcd71bf9707a6ba886d58465669bef7d919d6289ec729dc17ea" "2db9c83380f626b24a0ba7a1dd9972b72ec3e5ce9e58892350d7188106e0e114" default))
  '(package-selected-packages
-   '(elm-mode yaml-mode which-key use-package racket-mode markdown-mode magit json-mode helm-projectile helm-ag git-gutter flycheck-clj-kondo emmet-mode dracula-theme company clj-refactor ag))
+   '(magithub elm-mode yaml-mode which-key use-package racket-mode markdown-mode magit json-mode helm-projectile helm-ag git-gutter flycheck-clj-kondo emmet-mode dracula-theme company ag))
  '(warning-suppress-log-types '((emacs))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
