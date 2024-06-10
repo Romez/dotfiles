@@ -8,7 +8,30 @@
 
 ;;; Code:
 
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+
 (menu-bar-mode -1)
+
+;; highlights matching pairs of parentheses
+(show-paren-mode 1)
+
+;; increase messages buffer sieze
+(setq message-log-max 20000)
+
+;; fn -> λ ...
+(global-prettify-symbols-mode 1)
+
+;; Use GNU ls from coreutils
+(setq insert-directory-program "gls")
+
+;; Set the Custom File
+(setq custom-file "~/.emacs.d/custom.el")
+
+(setq backup-directory-alist `(("." . "~/.saves")))
+
+(setq inhibit-startup-message t)
+
+;;; Packages
 
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 
@@ -18,25 +41,28 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
-(use-package which-key
-  :ensure t
-  :config (which-key-mode))
-
 (use-package dracula-theme
   :ensure t
-  :config (load-theme 'dracula t))
+  ;; :config (load-theme 'dracula t)
+  )
 
-(use-package cider
+(use-package vs-light-theme
+  :ensure t
+  ;;:config (load-theme 'vs-light t)
+  )
+
+(use-package editorconfig
   :ensure t
   :config
-  (setq cider-repl-display-help-banner nil)
-  (setq cider-show-error-buffer 'always)
-  (setq cider-auto-select-error-buffer t))
+  (editorconfig-mode 1))
 
 (use-package paredit
   :ensure t
   :hook ((clojure-mode . paredit-mode)
-	 (emacs-lisp-mode . paredit-mode)))
+	 (emacs-lisp-mode . paredit-mode))
+  :bind (:map paredit-mode-map
+	      ("C-c )" . paredit-forward-slurp-sexp)
+	      ("C-c (" . paredit-forward-barf-sexp)))
 
 (use-package helm
   :ensure t
@@ -62,13 +88,13 @@
   :config
   ;; Enable helm-mode automatically
   (helm-mode 1)
+  ;; Enable helm follow mode globally
+  (setq helm-follow-mode-persistent t)
   (setq helm-M-x-fuzzy-match t)
   (setq helm-buffers-fuzzy-matching t)
   (setq helm-recentf-fuzzy-match t)
   (setq helm-semantic-fuzzy-match t)
   (setq helm-imenu-fuzzy-match t))
-
-(global-set-key (kbd "C-c h o") 'helm-occur)
 
 (use-package projectile
   :ensure t
@@ -77,22 +103,24 @@
   (projectile-mode +1))
 
 (setq projectile-globally-ignored-directories
-      '(".git" "node_modules" "venv" "build"))
-
-(setq projectile-globally-ignored-directories
       '(".git" "node_modules" "venv" "build" "class"))
 
 (use-package helm-projectile
   :ensure t
-  :config
-  (helm-projectile-on))
+  :init
+  (helm-projectile-on)
+  (setq helm-follow-mode-persistent t))
 
 (use-package helm-ag
   :ensure t)
 
-(use-package company
+(use-package flycheck
   :ensure t
-  :hook ((after-init . global-company-mode)))
+  :config
+  (global-flycheck-mode))
+
+(use-package flycheck-clj-kondo
+  :ensure t)
 
 (use-package racket-mode
   :ensure t
@@ -103,12 +131,7 @@
 (use-package yaml-mode
   :ensure t)
 
-(use-package flycheck
-  :ensure t
-  :init
-  (global-flycheck-mode))
-
-(use-package flycheck-clj-kondo
+(use-package cider
   :ensure t)
 
 (use-package clojure-mode
@@ -118,21 +141,31 @@
   :hook
   (clojure-mode . lsp))
 
+(use-package web-mode
+  :ensure t
+  :mode
+  (("\\.html?\\'" . web-mode)
+   ("\\.css\\'" . web-mode)
+   ("\\.js\\'" . web-mode)
+   ("\\.jsx\\'" . web-mode)))
+
 (use-package lsp-mode
   :ensure t
-  :commands lsp
+  :commands (lsp lsp-deferred)
+  :hook ((clojure-mode . lsp-deferred)
+	 (web-mode . lsp-deferred))
   :init
-  (setq lsp-keymap-prefix "C-c l")  ;; Prefix for LSP commands
+  (setq lsp-keymap-prefix "C-c l")  ;; Set prefix for lsp-command-keymap
   :config
-  (lsp-enable-which-key-integration t)
-  (setq lsp-prefer-flymake nil
-        lsp-enable-snippet t)
-  :hook ((web-mode . lsp-deferred)
-	 (js-mode . lsp)))
+  (setq lsp-prefer-flymake nil ; Use lsp-ui and flycheck instead of flymake
+	lsp-enable-snippet t
+	lsp-enable-indentation nil); CIDER now supports safe indentation
+  )
 
 (use-package lsp-ui
   :ensure t
   :commands lsp-ui-mode
+  :hook (lsp-mode . lsp-ui-mode)
   :custom
   (lsp-ui-doc-enable t)
   (lsp-ui-peek-enable t)
@@ -144,11 +177,27 @@
   :ensure t
   :hook (after-init . global-company-mode))
 
-;; Use company-lsp as a backend
-(use-package company-lsp
-  :commands company-lsp
+(use-package lsp-treemacs
+  :commands lsp-treemacs-errors-list)
+
+(use-package helm-lsp
+  :ensure t
+  :commands helm-lsp-workspace-symbol)
+
+(use-package which-key
+  :ensure t
+  :init
+  (which-key-mode)
   :config
-  (push 'company-lsp company-backends))
+  (setq which-key-idle-delay 0.5)
+  (setq which-key-popup-type 'side-window)
+  (setq which-key-side-window-location 'bottom)
+  (which-key-add-key-based-replacements
+   "C-c l" "lsp"   ;; Register lsp prefix
+   "C-c p" "projectile"))
+
+(with-eval-after-load 'lsp-mode
+  (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration))
 
 (use-package json-mode
   :ensure t)
@@ -163,39 +212,7 @@
 (use-package elm-mode
   :ensure t)
 
-(use-package web-mode
-  :ensure t
-  :mode
-  (("\\.html?\\'" . web-mode)
-   ("\\.css\\'" . web-mode)
-   ("\\.js\\'" . web-mode)
-   ("\\.jsx\\'" . web-mode)))
-
-(setq backup-directory-alist `(("." . "~/.saves")))
-
-(setq inhibit-startup-message t)
-
-(add-hook 'prog-mode-hook 'display-line-numbers-mode)
-
-;; highlights matching pairs of parentheses
-(show-paren-mode 1)
-
-;; increase messages buffer sieze
-(setq message-log-max 20000)
-
-;; fn -> λ ...
-(global-prettify-symbols-mode 1)
-
-;; To enable whitespace-mode globally
-(global-whitespace-mode 1)
-
-;; Set whitespace-mode to highlight lines longer than 120 characters
-(setq whitespace-line-column 120)
-
-;; Use GNU ls from coreutils
-(setq insert-directory-program "gls")
-
-;; Set the Custom File
-(setq custom-file "~/.emacs.d/custom.el")
+;; enable upcase-region
+(put 'upcase-region 'disabled nil)
 
 ;;; .emacs ends here
