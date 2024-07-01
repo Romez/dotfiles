@@ -7,8 +7,8 @@
 (require 'package)
 
 ;;; Code:
-
-(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+(global-display-line-numbers-mode t)
+(setq display-line-numbers-type 'visual) ;; Use relative line numbers
 
 (menu-bar-mode -1)
 
@@ -43,7 +43,7 @@
 
 (use-package dracula-theme
   :ensure t
-  ;; :config (load-theme 'dracula t)
+  :config (load-theme 'dracula t)
   )
 
 (use-package vs-light-theme
@@ -210,6 +210,9 @@
   :config (global-git-gutter-mode +1))
 
 (use-package elm-mode
+  :ensure t)
+
+(use-package multiple-cursors
   :ensure t)
 
 ;; enable upcase-region
