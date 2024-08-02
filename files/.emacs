@@ -21,9 +21,6 @@
 ;; fn -> λ ...
 (global-prettify-symbols-mode 1)
 
-;; Use GNU ls from coreutils
-(setq insert-directory-program "gls")
-
 ;; Set the Custom File
 (setq custom-file "~/.emacs.d/custom.el")
 
@@ -43,13 +40,17 @@
 
 (use-package dracula-theme
   :ensure t
-  :config (load-theme 'dracula t)
+  ; :config (load-theme 'dracula t)
   )
 
 (use-package vs-light-theme
   :ensure t
-  ;;:config (load-theme 'vs-light t)
+  ; :config (load-theme 'vs-light t)
   )
+
+(use-package jbeans-theme
+  :ensure t
+  :config (load-theme 'jbeans t))
 
 (use-package editorconfig
   :ensure t

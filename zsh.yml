@@ -14,12 +14,12 @@
       when: ansible_facts['os_family'] == "Darwin"
 
     - name: set zsh config
-      copy:
-        src: files/zshrc
+      file:
+        src: "{{playbook_dir}}/files/.zshrc"
         dest: ~/.zshrc
+        state: link
       tags:
-        - config
-            
+        - config            
     - name: set zsh as default shell
       user:
         name: "{{ ansible_user_id }}"
