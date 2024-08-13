@@ -11,6 +11,7 @@
 (setq display-line-numbers-type 'visual) ;; Use relative line numbers
 
 (menu-bar-mode -1)
+(tool-bar-mode -1)
 
 ;; highlights matching pairs of parentheses
 (show-paren-mode 1)
