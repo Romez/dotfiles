@@ -29,6 +29,8 @@
 
 (setq inhibit-startup-message t)
 
+(set-frame-font "Source Code Pro:pixelsize=15:weight=light:slant=normal:width=normal:spacing=100:scalable=true" nil t)
+
 ;;; Packages
 
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
