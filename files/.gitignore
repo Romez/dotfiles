@@ -15,3 +15,4 @@ tags.*
 node_modules
 .vscode
 .calva
+.gdb_history
