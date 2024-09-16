@@ -29,7 +29,7 @@
 
 (setq inhibit-startup-message t)
 
-(set-frame-font "Source Code Pro:pixelsize=15:weight=light:slant=normal:width=normal:spacing=100:scalable=true" nil t)
+(set-frame-font "Source Code Pro:pixelsize=18:weight=normal:slant=normal:width=normal:spacing=100:scalable=true" nil t)
 
 ;;; Packages
 
@@ -43,7 +43,7 @@
 
 (use-package dracula-theme
   :ensure t
-  ; :config (load-theme 'dracula t)
+  :config (load-theme 'dracula t)
   )
 
 (use-package vs-light-theme
@@ -53,7 +53,8 @@
 
 (use-package jbeans-theme
   :ensure t
-  :config (load-theme 'jbeans t))
+  ; :config (load-theme 'jbeans t)
+  )
 
 (use-package editorconfig
   :ensure t

@@ -6,7 +6,7 @@ export NVM_DIR="$HOME/.nvm"
 
 plugins=(git nvm npm mvn docker docker-compose kubectl dotenv)
 
-ZSH_THEME="robbyrussell"
+ZSH_THEME="dracula"
 
 export ZSH=$HOME/.oh-my-zsh
 source $ZSH/oh-my-zsh.sh
