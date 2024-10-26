@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  tasks:
+    - name: link tmux config
+      file:
+        src: "{{playbook_dir}}/files/.tmux.conf"
+        dest: ~/.tmux.conf
+        state: link
+      tags:
+        - conf

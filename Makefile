@@ -21,3 +21,6 @@ cmd:
 
 emacs:
 	ansible-playbook emacs.yml
+
+tmux-conf:
+	ansible-playbook tmux.yml --tags conf
