@@ -31,6 +31,9 @@
 
 (set-frame-font "Source Code Pro:pixelsize=18:weight=normal:slant=normal:width=normal:spacing=100:scalable=true" nil t)
 
+(setq c-default-style "linux"
+      c-basic-offset 4)
+
 ;;; Packages
 
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
@@ -158,7 +161,8 @@
   :ensure t
   :commands (lsp lsp-deferred)
   :hook ((clojure-mode . lsp-deferred)
-	 (web-mode . lsp-deferred))
+	 (web-mode . lsp-deferred)
+	 (c-mode . lsp-deferred))
   :init
   (setq lsp-keymap-prefix "C-c l")  ;; Set prefix for lsp-command-keymap
   :config
@@ -218,6 +222,9 @@
   :ensure t)
 
 (use-package multiple-cursors
+  :ensure t)
+
+(use-package cc-mode
   :ensure t)
 
 ;; enable upcase-region
