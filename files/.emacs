@@ -29,7 +29,7 @@
 
 (setq inhibit-startup-message t)
 
-(set-frame-font "Source Code Pro:pixelsize=18:weight=normal:slant=normal:width=normal:spacing=100:scalable=true" nil t)
+(set-frame-font "Source Code Pro-14:weight=normal:slant=normal:width=normal:spacing=100:scalable=true" nil t)
 
 (setq c-default-style "linux"
       c-basic-offset 4)
