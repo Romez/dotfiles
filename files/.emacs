@@ -46,18 +46,12 @@
 
 (use-package dracula-theme
   :ensure t
-  :config (load-theme 'dracula t)
-  )
-
-(use-package vs-light-theme
-  :ensure t
-  ; :config (load-theme 'vs-light t)
+  ;; :config (load-theme 'dracula t)
   )
 
 (use-package jbeans-theme
   :ensure t
-  ; :config (load-theme 'jbeans t)
-  )
+  :config (load-theme 'jbeans t))
 
 (use-package editorconfig
   :ensure t
@@ -71,38 +65,6 @@
   :bind (:map paredit-mode-map
 	      ("C-c )" . paredit-forward-slurp-sexp)
 	      ("C-c (" . paredit-forward-barf-sexp)))
-
-(use-package helm
-  :ensure t
-  :demand t
-  :init
-  ;; Set helm prefix key
-  (setq helm-command-prefix-key "C-c h")
-  :bind
-  (("M-x" . helm-M-x)
-   ("C-x C-f" . helm-find-files)
-   ("C-x b" . helm-mini)
-   ("M-y" . helm-show-kill-ring)
-   ("C-x C-b" . helm-buffers-list)
-   ("C-c h o" . helm-occur)
-   ("C-c h x" . helm-register)
-   ("C-c h g" . helm-do-grep-ag)
-   ;; Map C-x r b to register bookmarks in Helm
-   ("C-x r b" . helm-filtered-bookmarks)
-   ;; To find recent files using Helm, bind previous key map C-x C-r to helm-recentf
-   ("C-x C-r" . helm-recentf)
-   ;; To resume last Helm session, bind it to the previous key map C-c h h
-   ("C-c h h" . helm-resume))
-  :config
-  ;; Enable helm-mode automatically
-  (helm-mode 1)
-  ;; Enable helm follow mode globally
-  (setq helm-follow-mode-persistent t)
-  (setq helm-M-x-fuzzy-match t)
-  (setq helm-buffers-fuzzy-matching t)
-  (setq helm-recentf-fuzzy-match t)
-  (setq helm-semantic-fuzzy-match t)
-  (setq helm-imenu-fuzzy-match t))
 
 (use-package projectile
   :ensure t
@@ -145,9 +107,7 @@
 (use-package clojure-mode
   :ensure t
   :config
-  (require 'flycheck-clj-kondo)
-  :hook
-  (clojure-mode . lsp))
+  (require 'flycheck-clj-kondo))
 
 (use-package web-mode
   :ensure t
@@ -156,42 +116,6 @@
    ("\\.css\\'" . web-mode)
    ("\\.js\\'" . web-mode)
    ("\\.jsx\\'" . web-mode)))
-
-(use-package lsp-mode
-  :ensure t
-  :commands (lsp lsp-deferred)
-  :hook ((clojure-mode . lsp-deferred)
-	 (web-mode . lsp-deferred)
-	 (c-mode . lsp-deferred))
-  :init
-  (setq lsp-keymap-prefix "C-c l")  ;; Set prefix for lsp-command-keymap
-  :config
-  (setq lsp-prefer-flymake nil ; Use lsp-ui and flycheck instead of flymake
-	lsp-enable-snippet t
-	lsp-enable-indentation nil); CIDER now supports safe indentation
-  )
-
-(use-package lsp-ui
-  :ensure t
-  :commands lsp-ui-mode
-  :hook (lsp-mode . lsp-ui-mode)
-  :custom
-  (lsp-ui-doc-enable t)
-  (lsp-ui-peek-enable t)
-  (lsp-ui-sideline-enable t)
-  (lsp-ui-imenu-enable t)
-  (lsp-ui-flycheck-enable t))
-
-(use-package company
-  :ensure t
-  :hook (after-init . global-company-mode))
-
-(use-package lsp-treemacs
-  :commands lsp-treemacs-errors-list)
-
-(use-package helm-lsp
-  :ensure t
-  :commands helm-lsp-workspace-symbol)
 
 (use-package which-key
   :ensure t
@@ -202,11 +126,7 @@
   (setq which-key-popup-type 'side-window)
   (setq which-key-side-window-location 'bottom)
   (which-key-add-key-based-replacements
-   "C-c l" "lsp"   ;; Register lsp prefix
    "C-c p" "projectile"))
-
-(with-eval-after-load 'lsp-mode
-  (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration))
 
 (use-package json-mode
   :ensure t)
@@ -226,6 +146,36 @@
 
 (use-package cc-mode
   :ensure t)
+
+(use-package helm
+  :ensure t
+  ;; :demand t
+  :init  (setq helm-command-prefix-key "C-c h")
+  :bind
+  (("M-x" . helm-M-x)
+   ("C-x C-f" . helm-find-files)
+   ("C-x b" . helm-mini)
+   ("M-y" . helm-show-kill-ring)
+   ("C-x C-b" . helm-buffers-list)
+   ("C-c h o" . helm-occur)
+   ("C-c h x" . helm-register)
+   ("C-c h g" . helm-do-grep-ag)
+   ;; Map C-x r b to register bookmarks in Helm
+   ("C-x r b" . helm-filtered-bookmarks)
+   ;; To find recent files using Helm, bind previous key map C-x C-r to helm-recentf
+   ("C-x C-r" . helm-recentf)
+   ;; To resume last Helm session, bind it to the previous key map C-c h h
+   ("C-c h h" . helm-resume))
+  :config
+  ;; Enable helm-mode automatically
+  (helm-mode 1)
+  ;; Enable helm follow mode globally
+  (setq helm-follow-mode-persistent t)
+  (setq helm-M-x-fuzzy-match t)
+  (setq helm-buffers-fuzzy-matching t)
+  (setq helm-recentf-fuzzy-match t)
+  (setq helm-semantic-fuzzy-match t)
+  (setq helm-imenu-fuzzy-match t))
 
 ;; enable upcase-region
 (put 'upcase-region 'disabled nil)
