@@ -51,7 +51,8 @@
 
 (use-package jbeans-theme
   :ensure t
-  :config (load-theme 'jbeans t))
+  ;; :config (load-theme 'jbeans t)
+  )
 
 (use-package editorconfig
   :ensure t
@@ -176,6 +177,10 @@
   (setq helm-recentf-fuzzy-match t)
   (setq helm-semantic-fuzzy-match t)
   (setq helm-imenu-fuzzy-match t))
+
+(use-package company
+  :ensure t
+  :hook (after-init . global-company-mode))
 
 ;; enable upcase-region
 (put 'upcase-region 'disabled nil)
