@@ -182,22 +182,6 @@
   :ensure t
   :hook (after-init . global-company-mode))
 
-(use-package lsp-mode
-  :ensure t
-  :hook ((c-mode . lsp)
-	 (clojure-mode . lsp))
-  :commands lsp
-  :init (setq lsp-keymap-prefix "C-c l")
-  )
-
-(use-package lsp-ui
-  :ensure t
-  :commands lsp-ui-mode)
-
-(use-package js2-mode
-  :ensure t
-  :mode "\\.js\\'")
-
 ;; enable upcase-region
 (put 'upcase-region 'disabled nil)
 
