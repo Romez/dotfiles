@@ -17,7 +17,7 @@
 (show-paren-mode 1)
 
 ;; increase messages buffer sieze
-(setq message-log-max 15000)
+(setq message-log-max 20000)
 
 ;; fn -> λ ...
 (global-prettify-symbols-mode 1)
@@ -184,9 +184,11 @@
 
 (use-package lsp-mode
   :ensure t
-  :hook ((c-mode . lsp))
+  :hook ((c-mode . lsp)
+	 (clojure-mode . lsp))
   :commands lsp
-  :init (setq lsp-keymap-prefix "C-c l"))
+  :init (setq lsp-keymap-prefix "C-c l")
+  )
 
 (use-package lsp-ui
   :ensure t
