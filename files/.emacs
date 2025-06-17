@@ -182,6 +182,32 @@
   :ensure t
   :hook (after-init . global-company-mode))
 
+(use-package yasnippet
+  :ensure t
+  :config (yas-global-mode 1))
+
+(use-package clj-refactor
+  :ensure t
+  :after (clojure-mode cider yasnippet)
+  :hook ((clojure-mode . clj-refactor-mode)
+         (clojure-mode . yas-minor-mode))
+  :config
+  (cljr-add-keybindings-with-prefix "C-c C-m"))
+
+(use-package lsp-mode
+  :ensure t
+  :commands (lsp lsp-deferred)
+  :init
+  (setq lsp-enable-symbol-highlighting t
+        lsp-keymap-prefix "C-c l")
+  :hook ((clojure-mode . lsp-deferred)
+         (clojurescript-mode . lsp-deferred)
+         (clojurec-mode . lsp-deferred)))
+
+(use-package lsp-ui
+  :ensure t
+  :commands lsp-ui-mode)
+
 ;; enable upcase-region
 (put 'upcase-region 'disabled nil)
 
