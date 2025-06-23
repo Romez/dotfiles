@@ -23,6 +23,7 @@
 (global-prettify-symbols-mode 1)
 
 ;; Set the Custom File
+
 (setq custom-file "~/.emacs.d/custom.el")
 
 (setq backup-directory-alist `(("." . "~/.saves")))
@@ -31,8 +32,10 @@
 
 (set-frame-font "Source Code Pro-14:weight=normal:slant=normal:width=normal:spacing=100:scalable=true" nil t)
 
-(setq c-default-style "linux"
-      c-basic-offset 4)
+(add-hook 'c-mode-hook
+  (lambda ()
+    (setq c-basic-offset 4)
+    (setq indent-tabs-mode nil)))
 
 ;;; Packages
 
@@ -53,11 +56,6 @@
   :ensure t
   ;; :config (load-theme 'jbeans t)
   )
-
-(use-package editorconfig
-  :ensure t
-  :config
-  (editorconfig-mode 1))
 
 (use-package paredit
   :ensure t
@@ -93,12 +91,6 @@
 (use-package flycheck-clj-kondo
   :ensure t)
 
-(use-package racket-mode
-  :ensure t
-  :config
-  (require 'racket-xp)
-  (add-hook 'racket-mode-hook #'racket-xp-mode))
-
 (use-package yaml-mode
   :ensure t)
 
@@ -106,17 +98,13 @@
   :ensure t)
 
 (use-package clojure-mode
-  :ensure t
-  :config
-  (require 'flycheck-clj-kondo))
+  :ensure t)
 
 (use-package web-mode
   :ensure t
   :mode
   (("\\.html?\\'" . web-mode)
-   ("\\.css\\'" . web-mode)
-   ("\\.js\\'" . web-mode)
-   ("\\.jsx\\'" . web-mode)))
+   ("\\.css\\'" . web-mode)))
 
 (use-package which-key
   :ensure t
@@ -126,8 +114,7 @@
   (setq which-key-idle-delay 0.5)
   (setq which-key-popup-type 'side-window)
   (setq which-key-side-window-location 'bottom)
-  (which-key-add-key-based-replacements
-   "C-c p" "projectile"))
+  (which-key-add-key-based-replacements "C-c p" "projectile"))
 
 (use-package json-mode
   :ensure t)
@@ -139,9 +126,6 @@
   :ensure t
   :config (global-git-gutter-mode +1))
 
-(use-package elm-mode
-  :ensure t)
-
 (use-package multiple-cursors
   :ensure t)
 
@@ -150,7 +134,6 @@
 
 (use-package helm
   :ensure t
-  ;; :demand t
   :init  (setq helm-command-prefix-key "C-c h")
   :bind
   (("M-x" . helm-M-x)
@@ -178,37 +161,46 @@
   (setq helm-semantic-fuzzy-match t)
   (setq helm-imenu-fuzzy-match t))
 
-(use-package company
-  :ensure t
-  :hook (after-init . global-company-mode))
-
 (use-package yasnippet
   :ensure t
-  :config (yas-global-mode 1))
-
-(use-package clj-refactor
-  :ensure t
-  :after (clojure-mode cider yasnippet)
-  :hook ((clojure-mode . clj-refactor-mode)
-         (clojure-mode . yas-minor-mode))
   :config
-  (cljr-add-keybindings-with-prefix "C-c C-m"))
+  (yas-global-mode 1))
+
+(use-package company
+  :ensure t
+  :config
+  (global-company-mode 1))
 
 (use-package lsp-mode
   :ensure t
-  :commands (lsp lsp-deferred)
-  :init
-  (setq lsp-enable-symbol-highlighting t
-        lsp-keymap-prefix "C-c l")
-  :hook ((clojure-mode . lsp-deferred)
-         (clojurescript-mode . lsp-deferred)
-         (clojurec-mode . lsp-deferred)))
+  :hook ((c-mode c++-mode web-mode typescript-ts-mode tsx-ts-mode) . lsp-deferred)
+  :commands lsp lsp-deferred
+  :custom
+  (lsp-keymap-prefix "C-c l")
+  (lsp-clients-clangd-executable "clangd") ; если clangd уже в $PATH
+  (lsp-enable-symbol-highlighting t)
+  (lsp-headerline-breadcrumb-enable nil)
+  (lsp-idle-delay 0.3))
 
 (use-package lsp-ui
   :ensure t
-  :commands lsp-ui-mode)
+  :commands lsp-ui-mode
+  :after lsp-mode
+  :custom
+  (lsp-ui-doc-enable t)
+  (lsp-ui-sideline-enable t)
+  (lsp-ui-peek-enable t)
+  (lsp-ui-imenu-enable t))
 
-;; enable upcase-region
-(put 'upcase-region 'disabled nil)
+(setq major-mode-remap-alist
+      '((typescript-mode . typescript-ts-mode)
+        (tsx-mode        . tsx-ts-mode)))
+(add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
+
+(use-package editorconfig
+  :ensure t
+  :config
+  (editorconfig-mode 1))
 
 ;;; .emacs ends here
