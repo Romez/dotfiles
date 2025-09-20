@@ -54,7 +54,7 @@
 
 (use-package jbeans-theme
   :ensure t
-  ;; :config (load-theme 'jbeans t)
+  :config (load-theme 'jbeans t)
   )
 
 (use-package paredit
@@ -177,7 +177,6 @@
   :commands lsp lsp-deferred
   :custom
   (lsp-keymap-prefix "C-c l")
-  (lsp-clients-clangd-executable "clangd") ; если clangd уже в $PATH
   (lsp-enable-symbol-highlighting t)
   (lsp-headerline-breadcrumb-enable nil)
   (lsp-idle-delay 0.3))
@@ -186,11 +185,12 @@
   :ensure t
   :commands lsp-ui-mode
   :after lsp-mode
-  :custom
-  (lsp-ui-doc-enable t)
-  (lsp-ui-sideline-enable t)
-  (lsp-ui-peek-enable t)
-  (lsp-ui-imenu-enable t))
+  ;;:custom
+  ;;(lsp-ui-doc-enable t)
+  ;;(lsp-ui-sideline-enable t)
+  ;;(lsp-ui-peek-enable t)
+  ;;(lsp-ui-imenu-enable t)
+  )
 
 (setq major-mode-remap-alist
       '((typescript-mode . typescript-ts-mode)
