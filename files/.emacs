@@ -54,8 +54,12 @@
 
 (use-package jbeans-theme
   :ensure t
-  :config (load-theme 'jbeans t)
+  ;;:config (load-theme 'jbeans t)
   )
+
+(use-package solarized-theme
+  :ensure t
+  :config (load-theme 'solarized-light t))
 
 (use-package paredit
   :ensure t
@@ -132,6 +136,9 @@
 (use-package cc-mode
   :ensure t)
 
+(use-package go-mode
+  :ensure t)
+
 (use-package helm
   :ensure t
   :init  (setq helm-command-prefix-key "C-c h")
@@ -173,7 +180,7 @@
 
 (use-package lsp-mode
   :ensure t
-  :hook ((c-mode c++-mode web-mode typescript-ts-mode tsx-ts-mode) . lsp-deferred)
+  :hook ((c-mode c++-mode web-mode typescript-ts-mode tsx-ts-mode go-mode) . lsp-deferred)
   :commands lsp lsp-deferred
   :custom
   (lsp-keymap-prefix "C-c l")
