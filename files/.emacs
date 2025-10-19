@@ -144,7 +144,7 @@
   :init  (setq helm-command-prefix-key "C-c h")
   :bind
   (("M-x" . helm-M-x)
-   ("C-x C-f" . helm-find-files)
+   ;; ("C-x C-f" . helm-find-files)
    ("C-x b" . helm-mini)
    ("M-y" . helm-show-kill-ring)
    ("C-x C-b" . helm-buffers-list)
