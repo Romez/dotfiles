@@ -35,6 +35,7 @@
 (add-hook 'c-mode-hook
   (lambda ()
     (setq c-basic-offset 4)
+    (setq cpp)
     (setq indent-tabs-mode nil)))
 
 ;;; Packages
@@ -54,12 +55,13 @@
 
 (use-package jbeans-theme
   :ensure t
-  ;;:config (load-theme 'jbeans t)
+  :config (load-theme 'jbeans t)
   )
 
 (use-package solarized-theme
   :ensure t
-  :config (load-theme 'solarized-light t))
+  ;;:config (load-theme 'solarized-light t)
+  )
 
 (use-package paredit
   :ensure t
@@ -202,8 +204,11 @@
 (setq major-mode-remap-alist
       '((typescript-mode . typescript-ts-mode)
         (tsx-mode        . tsx-ts-mode)))
+
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
+
+(add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
 
 (use-package editorconfig
   :ensure t
