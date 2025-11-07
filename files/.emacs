@@ -10,6 +10,8 @@
 (global-display-line-numbers-mode t)
 (setq display-line-numbers-type 'visual) ;; Use relative line numbers
 
+(setq-default tab-width 4)
+
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 
@@ -35,7 +37,6 @@
 (add-hook 'c-mode-hook
   (lambda ()
     (setq c-basic-offset 4)
-    (setq cpp)
     (setq indent-tabs-mode nil)))
 
 ;;; Packages
@@ -91,8 +92,8 @@
 
 (use-package flycheck
   :ensure t
-  :config
-  (global-flycheck-mode))
+  ;; :config (global-flycheck-mode)
+  )
 
 (use-package flycheck-clj-kondo
   :ensure t)
@@ -182,7 +183,7 @@
 
 (use-package lsp-mode
   :ensure t
-  :hook ((c-mode c++-mode web-mode typescript-ts-mode tsx-ts-mode go-mode) . lsp-deferred)
+  :hook ((c-mode c++-mode web-mode typescript-ts-mode tsx-ts-mode) . lsp-deferred)
   :commands lsp lsp-deferred
   :custom
   (lsp-keymap-prefix "C-c l")
