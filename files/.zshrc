@@ -35,3 +35,5 @@ if [ -f '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion
 
 autoload -Uz compinit
 compinit
+
+export PATH="$(go env GOPATH)/bin:$PATH"

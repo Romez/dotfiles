@@ -34,10 +34,8 @@
 
 (set-frame-font "Source Code Pro-14:weight=normal:slant=normal:width=normal:spacing=100:scalable=true" nil t)
 
-(add-hook 'c-mode-hook
-  (lambda ()
-    (setq c-basic-offset 4)
-    (setq indent-tabs-mode nil)))
+(setq c-basic-offset 4)
+(setq indent-tabs-mode nil)
 
 ;;; Packages
 
@@ -208,8 +206,6 @@
 
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
-
-(add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
 
 (use-package editorconfig
   :ensure t
