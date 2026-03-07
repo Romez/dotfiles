@@ -10,6 +10,7 @@
 (global-display-line-numbers-mode t)
 (setq display-line-numbers-type 'visual) ;; Use relative line numbers
 
+(setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 
 (menu-bar-mode -1)
@@ -21,8 +22,22 @@
 ;; increase messages buffer sieze
 (setq message-log-max 20000)
 
-;; fn -> λ ...
+;; fn -> λ
 (global-prettify-symbols-mode 1)
+
+(global-whitespace-mode 1)
+
+(setq-default whitespace-style '(face spaces empty tabs trailing space-mark tab-mark ))
+
+(with-eval-after-load 'whitespace
+  (set-face-attribute 'whitespace-space nil
+                      :foreground "gray25"
+                       :background nil
+                       :weight 'light)
+  (set-face-attribute 'whitespace-tab nil
+                      :foreground "gray25"
+                      :background nil
+                      :weight 'light))
 
 ;; Set the Custom File
 
@@ -200,16 +215,21 @@
   ;;(lsp-ui-imenu-enable t)
   )
 
-(setq major-mode-remap-alist
-      '((typescript-mode . typescript-ts-mode)
-        (tsx-mode        . tsx-ts-mode)))
 
-(add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
-(add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
+; (setq major-mode-remap-alist
+; '((typescript-mode . typescript-ts-mode)
+;   (tsx-mode        . tsx-ts-mode)))
+
+;;(add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
+;;(add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
 
 (use-package editorconfig
   :ensure t
   :config
   (editorconfig-mode 1))
+
+(use-package move-text
+  :ensure t
+  :init (move-text-default-bindings))
 
 ;;; .emacs ends here
