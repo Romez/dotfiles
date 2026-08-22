@@ -18,3 +18,4 @@ node_modules
 .gdb_history
 .editorconfig
 .env
+.dir-locals.el

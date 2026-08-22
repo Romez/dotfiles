@@ -7,8 +7,8 @@
 (require 'package)
 
 ;;; Code:
+(setq display-line-numbers-type 'visual)
 (global-display-line-numbers-mode t)
-(setq display-line-numbers-type 'visual) ;; Use relative line numbers
 
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
@@ -29,19 +29,11 @@
 
 (setq-default whitespace-style '(face spaces empty tabs trailing space-mark tab-mark ))
 
-(with-eval-after-load 'whitespace
-  (set-face-attribute 'whitespace-space nil
-                      :foreground "gray25"
-                       :background nil
-                       :weight 'light)
-  (set-face-attribute 'whitespace-tab nil
-                      :foreground "gray25"
-                      :background nil
-                      :weight 'light))
-
 ;; Set the Custom File
 
 (setq custom-file "~/.emacs.d/custom.el")
+(when (file-exists-p custom-file)
+  (load custom-file))
 
 (setq backup-directory-alist `(("." . "~/.saves")))
 
@@ -64,26 +56,15 @@
 
 (use-package dracula-theme
   :ensure t
-  ;; :config (load-theme 'dracula t)
-  )
-
-(use-package jbeans-theme
-  :ensure t
-  :config (load-theme 'jbeans t)
-  )
-
-(use-package solarized-theme
-  :ensure t
-  ;;:config (load-theme 'solarized-light t)
-  )
+  :config (load-theme 'dracula t))
 
 (use-package paredit
   :ensure t
   :hook ((clojure-mode . paredit-mode)
-	 (emacs-lisp-mode . paredit-mode))
+         (emacs-lisp-mode . paredit-mode))
   :bind (:map paredit-mode-map
-	      ("C-c )" . paredit-forward-slurp-sexp)
-	      ("C-c (" . paredit-forward-barf-sexp)))
+              ("C-c )" . paredit-forward-slurp-sexp)
+              ("C-c (" . paredit-forward-barf-sexp)))
 
 (use-package projectile
   :ensure t
@@ -94,47 +75,22 @@
 (setq projectile-globally-ignored-directories
       '(".git" "node_modules" "venv" "build" "class"))
 
-(use-package helm-projectile
-  :ensure t
-  :init
-  (helm-projectile-on)
-  (setq helm-follow-mode-persistent t))
+;; (use-package flycheck
+;;   :ensure t
+;;   ;; :config (global-flycheck-mode)
+;;   )
 
-(use-package helm-ag
-  :ensure t)
+;; (use-package flycheck-clj-kondo
+;;   :ensure t)
 
-(use-package flycheck
-  :ensure t
-  ;; :config (global-flycheck-mode)
-  )
-
-(use-package flycheck-clj-kondo
-  :ensure t)
-
-(use-package yaml-mode
-  :ensure t)
+;; (use-package yaml-mode
+;;   :ensure t)
 
 (use-package cider
   :ensure t)
 
 (use-package clojure-mode
   :ensure t)
-
-(use-package web-mode
-  :ensure t
-  :mode
-  (("\\.html?\\'" . web-mode)
-   ("\\.css\\'" . web-mode)))
-
-(use-package which-key
-  :ensure t
-  :init
-  (which-key-mode)
-  :config
-  (setq which-key-idle-delay 0.5)
-  (setq which-key-popup-type 'side-window)
-  (setq which-key-side-window-location 'bottom)
-  (which-key-add-key-based-replacements "C-c p" "projectile"))
 
 (use-package json-mode
   :ensure t)
@@ -146,18 +102,30 @@
   :ensure t
   :config (global-git-gutter-mode +1))
 
-(use-package multiple-cursors
-  :ensure t)
+(use-package kotlin-mode
+  :ensure t
+  :mode "\\.kts?\\'")
 
-(use-package cc-mode
-  :ensure t)
+;; (use-package multiple-cursors
+;;   :ensure t)
 
-(use-package go-mode
-  :ensure t)
+;; (use-package go-mode
+;;   :ensure t)
 
 (use-package helm
   :ensure t
+  :demand t
   :init  (setq helm-command-prefix-key "C-c h")
+
+  :custom
+  ;; Enable helm follow mode globally
+  (setq helm-follow-mode-persistent t)
+  (setq helm-M-x-fuzzy-match t)
+  (setq helm-buffers-fuzzy-matching t)
+  (setq helm-recentf-fuzzy-match t)
+  (setq helm-semantic-fuzzy-match t)
+  (setq helm-imenu-fuzzy-match t)
+
   :bind
   (("M-x" . helm-M-x)
    ;; ("C-x C-f" . helm-find-files)
@@ -176,60 +144,49 @@
   :config
   ;; Enable helm-mode automatically
   (helm-mode 1)
-  ;; Enable helm follow mode globally
-  (setq helm-follow-mode-persistent t)
-  (setq helm-M-x-fuzzy-match t)
-  (setq helm-buffers-fuzzy-matching t)
-  (setq helm-recentf-fuzzy-match t)
-  (setq helm-semantic-fuzzy-match t)
-  (setq helm-imenu-fuzzy-match t))
+  )
 
-(use-package yasnippet
+(use-package helm-projectile
   :ensure t
-  :config
-  (yas-global-mode 1))
-
-(use-package company
-  :ensure t
-  :config
-  (global-company-mode 1))
+  :after (helm projectile)
+  :config (helm-projectile-on))
 
 (use-package lsp-mode
   :ensure t
-  :hook ((c-mode c++-mode web-mode typescript-ts-mode tsx-ts-mode) . lsp-deferred)
-  :commands lsp lsp-deferred
+  :commands (lsp lsp-deferred)
+  :hook ((web-mode
+          typescript-ts-mode
+          tsx-ts-mode)
+         . lsp-deferred)
   :custom
   (lsp-keymap-prefix "C-c l")
   (lsp-enable-symbol-highlighting t)
-  (lsp-headerline-breadcrumb-enable nil)
-  (lsp-idle-delay 0.3))
-
-(use-package lsp-ui
-  :ensure t
-  :commands lsp-ui-mode
-  :after lsp-mode
-  ;;:custom
-  ;;(lsp-ui-doc-enable t)
-  ;;(lsp-ui-sideline-enable t)
-  ;;(lsp-ui-peek-enable t)
-  ;;(lsp-ui-imenu-enable t)
+  (lsp-headerline-breadcrumb-enable t)
+  (lsp-idle-delay 0.3)
+  (lsp-enable-snippet t)
   )
-
-
-; (setq major-mode-remap-alist
-; '((typescript-mode . typescript-ts-mode)
-;   (tsx-mode        . tsx-ts-mode)))
-
-;;(add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
-;;(add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
 
 (use-package editorconfig
   :ensure t
   :config
   (editorconfig-mode 1))
 
-(use-package move-text
+(use-package company
   :ensure t
-  :init (move-text-default-bindings))
+  :config (global-company-mode 1))
+
+;; (use-package move-text
+;;   :ensure t
+;;   :init (move-text-default-bindings))
+
+(with-eval-after-load 'whitespace
+  (set-face-attribute 'whitespace-space nil
+                      :foreground "gray25"
+                      :background nil
+                      :weight 'light)
+  (set-face-attribute 'whitespace-tab nil
+                      :foreground "gray25"
+                      :background nil
+                      :weight 'light))
 
 ;;; .emacs ends here
